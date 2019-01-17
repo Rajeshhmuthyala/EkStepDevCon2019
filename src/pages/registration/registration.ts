@@ -19,7 +19,7 @@ export class RegistrationPage {orgList: Array<any> = [];
     private device: Device
     ) {
     this.orgList = ['EkStep', 'BeyondSquare', 'Compassites', 'FrameWirk', 'Funtoot', 'GWL',
-    'ILIMI','Lollypop','MantraLabs','OPTIT','PosteroTech','Qualitrix','Tarento','TEKDI','Tibil','TurtleBowl','Zool'];
+    'ILIMI','Lollypop','MantraLabs','OPTIT','PosteroTech','Qualitrix','Tarento','TEKDI','Tibil','TurtleBowl','Zool', 'Other'];
     this.guestRegistrationForm = this.formBuilder.group({
       name: ['', Validators.required],
       org: ['', Validators.required]
@@ -31,10 +31,12 @@ export class RegistrationPage {orgList: Array<any> = [];
     const org = this.guestRegistrationForm.value.org;
     const uuid = this.device.uuid;
     this.appPreference.store(PreferenceKey.DEVICE_ID, uuid);
-    this.navCtrl.push(HomePage, {
-      name: name,
-      org: org
-    })
+    this.appPreference.store(PreferenceKey.USER_NAME, name);
+    this.appPreference.store(PreferenceKey.ORGANISATION, org);
+    const index = this.navCtrl.getActive().index;
+    this.navCtrl.push(HomePage).then( () => {
+      this.navCtrl.remove(index);
+    });
   }
 
 
