@@ -1,0 +1,7 @@
+{
+  "name": "DevCon",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
