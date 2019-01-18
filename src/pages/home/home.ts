@@ -10,6 +10,7 @@ import { PreferenceKey } from '../../app/app.constant';
 export class HomePage {
   name: string;
   org : string;
+  qrcode: string;
 
   constructor(
     private navCtrl: NavController,
@@ -19,9 +20,12 @@ export class HomePage {
   ionViewWillEnter() {
     this.appPreference.fetch(PreferenceKey.USER_NAME).then( val => {
       this.name = val;
-    })
+    });
     this.appPreference.fetch(PreferenceKey.ORGANISATION).then( val => {
       this.org = val;
+    });
+    this.appPreference.fetch(PreferenceKey.QRCODE).then( val => {
+      this.qrcode = val;
     })
 
   }

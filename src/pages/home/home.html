@@ -10,7 +10,9 @@
         <ion-card-content>Organisation: {{org}} </ion-card-content>
     </ion-card>
     <ion-card>
-        <ion-card-header> QR Code </ion-card-header>
+        <div col-12>
+            <img class="qrcode" [src]='qrcode'>
+        </div>
     </ion-card>
     <ion-card>
         <ion-card-header> Floor Header <br> Christopher Fernandes</ion-card-header>
