@@ -4,24 +4,37 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-  <div col-12>
-    <img class="home-image" src="../../assets/imgs/ekstep.jpg" >
-  </div>
+<ion-content style="background-color: #116F8F">
+    <ion-card style="height: 40% !important; margin-top: 5px; border-radius: 5px; " >
+        <ion-slides  autoplay="3000" loop="true" speed="2000">
+            <ion-slide >
+                <img src="../../assets/imgs/img1.jpg" />
+            </ion-slide>
+            <ion-slide >
+                <img src="../../assets/imgs/img2.jpg" />
+            </ion-slide>
+            <ion-slide >
+                <img src="../../assets/imgs/ekstep.jpg" />
+            </ion-slide>
+          </ion-slides>
+    </ion-card>
 
-  <form [formGroup]="guestRegistrationForm">
-    <ion-item>
-      <ion-label stacked text-uppercase>Name<span ion-text color="danger">&nbsp;*</span></ion-label>
-      <ion-input formControlName="name" placeholder="Ex: Joel Johnson"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label stacked text-uppercase>Organisation</ion-label>
-      <ion-select multiple="false" text-capitalize formControlName="org">
-        <ion-option *ngFor="let org of orgList" value="{{org}}">{{org}}</ion-option>
-      </ion-select>
-    </ion-item>
-  </form>
+  <ion-card class="form-field">
+      <form [formGroup]="guestRegistrationForm">
+          <ion-item class="name-field"> 
+            <ion-label stacked text-uppercase>Name<span ion-text color="danger">&nbsp;*</span></ion-label>
+            <ion-input formControlName="name" placeholder="Ex: Joel Johnson"></ion-input>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label stacked text-uppercase>Organisation</ion-label>
+            <ion-select multiple="false" text-capitalize formControlName="org">
+              <ion-option *ngFor="let org of orgList" value="{{org}}">{{org}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </form>
+  </ion-card>
+  
 </ion-content>
 <ion-footer>
   <button ion-button block [disabled]="!guestRegistrationForm.valid"(click)="register()">Register</button>
