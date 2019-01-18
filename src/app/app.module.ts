@@ -9,12 +9,14 @@ import { Device } from '@ionic-native/device';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { RegistrationPage } from '../pages/registration/registration';
+import { StallFormPage } from '../pages/stallform/stallform.component';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    RegistrationPage
+    RegistrationPage,
+    StallFormPage
   ],
   imports: [
     BrowserModule,
@@ -24,7 +26,8 @@ import { RegistrationPage } from '../pages/registration/registration';
   entryComponents: [
     MyApp,
     HomePage,
-    RegistrationPage
+    RegistrationPage,
+    StallFormPage
   ],
   providers: [
     StatusBar,
