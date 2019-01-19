@@ -19,6 +19,24 @@
     </ion-card>
     </form>
 
+  <ion-card class="form-field">
+      <form [formGroup]="guestRegistrationForm">
+          <ion-item class="name-field"> 
+            <ion-label stacked text-uppercase>Name<span ion-text color="danger">&nbsp;*</span></ion-label>
+            <ion-input formControlName="name" placeholder="Ex: Joel Johnson"></ion-input>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label stacked text-uppercase>Organisation</ion-label>
+            <ion-select multiple="false" text-capitalize formControlName="org">
+              <ion-option *ngFor="let org of orgList" value="{{org}}">{{org}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </form>
+  </ion-card>
+  <ion-card class='hidden-card' (click)='registerNewStall()'>
+  </ion-card>
+  
 </ion-content>
 <ion-footer>
   <button ion-button block style="color: black; height: 60px; border-radius: 8px; font-size: 1.2em;" [disabled]="!guestRegistrationForm.valid" (click)="register()">Register</button>

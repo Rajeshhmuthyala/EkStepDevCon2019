@@ -5,6 +5,7 @@ import { HomePage } from '../home/home';
 import { AppPreferences } from '@ionic-native/app-preferences';
 import { Device } from '@ionic-native/device';
 import { PreferenceKey } from '../../app/app.constant';
+import { StallFormPage } from '../stallform/stallform.component';
 
 declare let cordova;
 
@@ -14,6 +15,8 @@ declare let cordova;
 })
 export class RegistrationPage {orgList: Array<any> = [];
   guestRegistrationForm: FormGroup;
+  private formCount: number = 0;
+  private resetCountTimer: any;
 
   constructor(private navCtrl: NavController,
     private formBuilder: FormBuilder,
@@ -60,5 +63,26 @@ export class RegistrationPage {orgList: Array<any> = [];
     }, (err) => {
         console.error('QRCodeJS error is ' + JSON.stringify(err));
     }, options);
+  }
+
+  registerNewStall() {
+    this.formCount++;
+    if(this.formCount === 10) {
+      clearTimeout(this.resetCountTimer);
+      this.resetCountTimer = undefined;
+      this.formCount = 0;
+      alert('moving to form page!');
+      this.navCtrl.push(StallFormPage, {});
+    }
+    if(this.resetCountTimer) {
+      clearTimeout(this.resetCountTimer);
+      this.resetCountTimer = undefined;
+      console.log('timeout cleared', this.formCount);
+    }
+    this.resetCountTimer = setTimeout(() => {
+      this.resetCountTimer = undefined;
+      this.formCount = 0;
+    }, 1000);
+
   }
 }

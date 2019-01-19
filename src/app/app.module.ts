@@ -10,13 +10,15 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { RegistrationPage } from '../pages/registration/registration';
 import { Splash } from '../pages/splash/splash';
+import { StallFormPage } from '../pages/stallform/stallform.component';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     RegistrationPage,
-    Splash
+    Splash,
+    StallFormPage
   ],
   imports: [
     BrowserModule,
@@ -27,7 +29,8 @@ import { Splash } from '../pages/splash/splash';
     MyApp,
     HomePage,
     RegistrationPage,
-    Splash
+    Splash,
+    StallFormPage
   ],
   providers: [
     StatusBar,

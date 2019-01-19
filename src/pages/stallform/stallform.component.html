@@ -1,0 +1,25 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>New Stall Form</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row justify-content-center align-items-center>
+            <ion-card>
+                <ion-item>
+                    <ion-input class='font-md' placeholder='Stall Name' [(ngModel)]='stallName'></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-input placeholder='Team' class='font-md' [(ngModel)]='team'></ion-input>
+                </ion-item>
+                <ion-item>
+                    <button class='font-md' ion-button round block (click)='submitForm()'>Submit</button>
+                </ion-item>
+            </ion-card>
+        </ion-row>
+    </ion-grid>
+
+
+</ion-content>
