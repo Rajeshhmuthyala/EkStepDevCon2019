@@ -9,12 +9,14 @@ import { Device } from '@ionic-native/device';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { RegistrationPage } from '../pages/registration/registration';
+import { Splash } from '../pages/splash/splash';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    RegistrationPage
+    RegistrationPage,
+    Splash
   ],
   imports: [
     BrowserModule,
@@ -24,14 +26,16 @@ import { RegistrationPage } from '../pages/registration/registration';
   entryComponents: [
     MyApp,
     HomePage,
-    RegistrationPage
+    RegistrationPage,
+    Splash
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AppPreferences,
-    Device
+    Device,
+    Splash
   ]
 })
 export class AppModule {}
