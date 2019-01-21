@@ -1,11 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {ModalController, Platform} from 'ionic-angular';
+import {Platform} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {RegistrationPage} from '../pages/registration/registration';
 import {PreferenceKey} from './app.constant';
 import {AppPreferences} from '@ionic-native/app-preferences';
 import {Device} from '@ionic-native/device';
-import {Splash} from '../pages/splash/splash';
 import {HomePage} from '../pages/home/home';
 
 @Component({
@@ -18,8 +17,7 @@ export class MyApp implements OnInit {
         private platform: Platform,
         private statusBar: StatusBar,
         private appPreference: AppPreferences,
-        private device: Device,
-        private modalCtrl: ModalController
+        private device: Device
     ) {
     }
 
@@ -32,9 +30,6 @@ export class MyApp implements OnInit {
             } else {
                 this.rootPage = RegistrationPage;
             }
-
-            let splash = this.modalCtrl.create(Splash);
-            return splash.present();
         });
     }
 

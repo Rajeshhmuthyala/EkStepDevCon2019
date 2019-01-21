@@ -1,25 +1,35 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Welcome</ion-title>
+    </ion-navbar>
+</ion-header>
+
 <ion-content class="container">
-  <div style="height: 20% !important; margin-top: 5px; border-radius: 5px; ">
-      <img src="../../assets/imgs/wc.png" />
-  </div>
     <form [formGroup]="guestRegistrationForm" class="form">
-      <ion-card class="form-field">
-        <ion-item class="name-field">
-          <ion-label stacked text-uppercase>Name<span ion-text color="danger">&nbsp;*</span></ion-label>
-          <ion-input formControlName="name" placeholder="Ex: Joel Johnson"></ion-input>
-        </ion-item>
-      </ion-card>
-      <ion-card class="form-field">
-      <ion-item>
-        <ion-label stacked text-uppercase >Organisation</ion-label>
-        <ion-select multiple="false" text-capitalize [(ngModel)]="Organisation" formControlName="org">
-          <ion-option *ngFor="let org of orgList" value="{{org}}">{{org}}</ion-option>
-        </ion-select>
-      </ion-item>
-    </ion-card>
+        <ion-card class="form-field">
+            <ion-item class="name-field">
+                <ion-label stacked text-uppercase>Name<span ion-text color="danger">&nbsp;*</span></ion-label>
+                <ion-input formControlName="name" placeholder="Ex: Joel Johnson"></ion-input>
+            </ion-item>
+        </ion-card>
+        <ion-card class="form-field">
+            <ion-item>
+                <ion-label stacked text-uppercase>Organisation</ion-label>
+                <ion-select multiple="false" text-capitalize formControlName="org">
+                    <ion-option *ngFor="let org of orgList" value="{{org}}">{{org}}</ion-option>
+                </ion-select>
+            </ion-item>
+        </ion-card>
     </form>
-  
+
+    <ion-item>
+        <button ion-button full (tap)='onClickToNavigateToStallForm()'>
+            Hidden Stall Panel
+        </button>
+    </ion-item>
 </ion-content>
+
 <ion-footer>
-  <button ion-button block style="color: black; height: 60px; border-radius: 8px; font-size: 1.2em;" [disabled]="!guestRegistrationForm.valid" (click)="register()">Register</button>
+    <button ion-button block [disabled]="!guestRegistrationForm.valid" (click)="register()">Register
+    </button>
 </ion-footer>
