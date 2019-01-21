@@ -1,45 +1,49 @@
-import { Component } from '@angular/core';
-import { Platform, ModalController } from 'ionic-angular';
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { RegistrationPage } from '../pages/registration/registration';
-import { PreferenceKey } from './app.constant';
-import { AppPreferences } from '@ionic-native/app-preferences';
-import { Device } from '@ionic-native/device';
-import { HomePage } from '../pages/home/home';
-import { Splash } from '../pages/splash/splash';
+import {Component, OnInit} from '@angular/core';
+import {ModalController, Platform} from 'ionic-angular';
+import {StatusBar} from '@ionic-native/status-bar';
+import {RegistrationPage} from '../pages/registration/registration';
+import {PreferenceKey} from './app.constant';
+import {AppPreferences} from '@ionic-native/app-preferences';
+import {Device} from '@ionic-native/device';
+import {Splash} from '../pages/splash/splash';
+import {HomePage} from '../pages/home/home';
+
 @Component({
-  templateUrl: 'app.html'
+    templateUrl: 'app.html'
 })
-export class MyApp {
-  rootPage: any = RegistrationPage;
+export class MyApp implements OnInit {
+    rootPage: any = RegistrationPage;
 
-  constructor(
-    platform: Platform,
-    statusBar: StatusBar,
-    splashScreen: SplashScreen,
-    private appPreference: AppPreferences,
-    private device: Device,
-    modalCtrl: ModalController
-  ) {
-    platform.ready().then(() => {
-      statusBar.styleDefault();
-      // splashScreen.hide();
-      let splash = modalCtrl.create(Splash);
-      splash.present();
-      this.isAlreadyRegistered();
-    });
-  }
+    constructor(
+        private platform: Platform,
+        private statusBar: StatusBar,
+        private appPreference: AppPreferences,
+        private device: Device,
+        private modalCtrl: ModalController
+    ) {
+    }
 
-  isAlreadyRegistered() {
-    this.appPreference.fetch(PreferenceKey.DEVICE_ID).then(val => {
-      if (val === this.device.uuid) {
-        this.rootPage = HomePage;
-      } else {
-        this.rootPage = RegistrationPage;
-      }
-    })
+    public async ngOnInit() {
+        return this.platform.ready().then(async () => {
+            this.statusBar.styleDefault();
 
-  }
+            if (await this.isAlreadyRegistered()) {
+                this.rootPage = HomePage;
+            } else {
+                this.rootPage = RegistrationPage;
+            }
+
+            let splash = this.modalCtrl.create(Splash);
+            return splash.present();
+        });
+    }
+
+    private async isAlreadyRegistered(): Promise<string | undefined> {
+        return this.appPreference.fetch(PreferenceKey.DEVICE_ID).then(val => {
+            if (val === this.device.uuid) {
+                return Promise.resolve(this.device.uuid);
+            }
+        });
+    }
 }
 
