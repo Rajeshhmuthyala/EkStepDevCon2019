@@ -7,7 +7,6 @@ import { PreferenceKey } from './app.constant';
 import { AppPreferences } from '@ionic-native/app-preferences';
 import { Device } from '@ionic-native/device';
 import { HomePage } from '../pages/home/home';
-import { Splash } from '../pages/splash/splash';
 @Component({
   templateUrl: 'app.html'
 })
@@ -24,9 +23,7 @@ export class MyApp {
   ) {
     platform.ready().then(() => {
       statusBar.styleDefault();
-      // splashScreen.hide();
-      let splash = modalCtrl.create(Splash);
-      splash.present();
+      splashScreen.hide();
       this.isAlreadyRegistered();
     });
   }

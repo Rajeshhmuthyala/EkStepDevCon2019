@@ -9,7 +9,6 @@ import { Device } from '@ionic-native/device';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { RegistrationPage } from '../pages/registration/registration';
-import { Splash } from '../pages/splash/splash';
 import { StallFormPage } from '../pages/stallform/stallform.component';
 
 @NgModule({
@@ -17,7 +16,7 @@ import { StallFormPage } from '../pages/stallform/stallform.component';
     MyApp,
     HomePage,
     RegistrationPage,
-    Splash,
+
     StallFormPage
   ],
   imports: [
@@ -29,7 +28,6 @@ import { StallFormPage } from '../pages/stallform/stallform.component';
     MyApp,
     HomePage,
     RegistrationPage,
-    Splash,
     StallFormPage
   ],
   providers: [
@@ -38,7 +36,6 @@ import { StallFormPage } from '../pages/stallform/stallform.component';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AppPreferences,
     Device,
-    Splash
   ]
 })
 export class AppModule {}
