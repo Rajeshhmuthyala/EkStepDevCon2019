@@ -1,14 +1,14 @@
 import {Component, Inject} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {HomePage} from '../home/home';
 import {AppPreferences} from '@ionic-native/app-preferences';
 import {Device} from '@ionic-native/device';
-import {PreferenceKey} from '../../app/app.constant';
 import {StallFormPage} from '../stallform/stallform.component';
 import {AppConfig} from '../../config/AppConfig';
-
-declare let cordova;
+import {UserService} from '../../services/user/user.service';
+import {CreateUserResponse} from '../../services/user/response';
+import {PreferenceKey} from '../../app/app.constant';
+import {HomePage} from '../home/home';
 
 @Component({
     selector: 'page-registration',
@@ -25,7 +25,8 @@ export class RegistrationPage {
                 private formBuilder: FormBuilder,
                 private appPreference: AppPreferences,
                 private device: Device,
-                @Inject('APP_CONFIG') private config: AppConfig
+                @Inject('APP_CONFIG') private config: AppConfig,
+                @Inject('USER_SERVICE') private userService: UserService
     ) {
         this.orgList = this.config.orgList;
         this.guestRegistrationForm = this.formBuilder.group({
@@ -34,38 +35,18 @@ export class RegistrationPage {
         });
     }
 
-    register() {
-        const name = this.guestRegistrationForm.value.name;
-        const org = this.guestRegistrationForm.value.org;
-        const uuid = this.device.uuid;
-        this.generateQRCode(uuid, name, org);
-        this.appPreference.store(PreferenceKey.DEVICE_ID, uuid);
-        this.appPreference.store(PreferenceKey.USER_NAME, name);
-        this.appPreference.store(PreferenceKey.ORGANISATION, org);
-        const index = this.navCtrl.getActive().index;
-        this.navCtrl.push(HomePage).then(() => {
-            this.navCtrl.remove(index);
-        });
-    }
-
-    generateQRCode(uuid: any, name: string, org: string) {
-        let options = {
-            width: 140,
-            height: 140,
-            colorDark: "#000000",
-            colorLight: "#ffffff",
-        };
-        const qrData = {
-            name: name,
-            org: org,
-            uuid: uuid
-        };
-        cordova.plugins.qrcodejs.encode('TEXT_TYPE', JSON.stringify(qrData), (base64EncodedQRImage) => {
-            console.info('QRCodeJS response is ' + base64EncodedQRImage);
-            this.appPreference.store(PreferenceKey.QRCODE, base64EncodedQRImage);
-        }, (err) => {
-            console.error('QRCodeJS error is ' + JSON.stringify(err));
-        }, options);
+    public async register() {
+        this.userService.createUser({
+            userName: this.guestRegistrationForm.get('name').value,
+            orgName: this.guestRegistrationForm.get('org').value
+        }).then(async (createUserResponse: CreateUserResponse) => {
+            await this.appPreference.store(PreferenceKey.CREATE_USER_RESPONSE, JSON.stringify(createUserResponse));
+        }).then(() => {
+            const index = this.navCtrl.getActive().index;
+            this.navCtrl.push(HomePage).then(() => {
+                this.navCtrl.remove(index);
+            });
+        })
     }
 
     onClickToNavigateToStallForm() {

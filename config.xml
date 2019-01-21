@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="in.devcon.app" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="in.devcon.app" version="0.0.1" xmlns="http://www.w3.org/ns/widgets">
     <name>Devcon2019</name>
     <description>Application for Ekstep DevCon 2019, </description>
     <author email="devcon@mobility.com" href="http://ionicframework.com/">Ionic Framework Team</author>
@@ -82,6 +82,6 @@
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
     <plugin name="cordova-plugin-app-preferences" spec="0.99.3" />
     <plugin name="cordova-plugin-qrcodejs" spec="https://github.com/MenelicSoftware/cordova-plugin-qrcodejs.git" />
-    <engine name="android" spec="7.1.4" />
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
+    <engine name="android" spec="7.1.4"/>
 </widget>

@@ -34,9 +34,9 @@ export class MyApp implements OnInit {
     }
 
     private async isAlreadyRegistered(): Promise<string | undefined> {
-        return this.appPreference.fetch(PreferenceKey.DEVICE_ID).then(val => {
-            if (val === this.device.uuid) {
-                return Promise.resolve(this.device.uuid);
+        return this.appPreference.fetch(PreferenceKey.CREATE_USER_RESPONSE).then(val => {
+            if (val) {
+                return Promise.resolve(JSON.parse(val));
             }
         });
     }

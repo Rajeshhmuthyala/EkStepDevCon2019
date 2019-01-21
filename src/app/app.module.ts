@@ -11,6 +11,7 @@ import {HomePage} from '../pages/home/home';
 import {RegistrationPage} from '../pages/registration/registration';
 import {StallFormPage} from '../pages/stallform/stallform.component';
 import {DevConConfig} from '../config/DevConConfig';
+import {UserServiceMock} from '../services/user/user-service-mock';
 
 @NgModule({
     declarations: [
@@ -35,6 +36,10 @@ import {DevConConfig} from '../config/DevConConfig';
         SplashScreen,
         AppPreferences,
         Device,
+        {
+            provide: 'USER_SERVICE',
+            useClass: UserServiceMock
+        },
         {
             provide: 'APP_CONFIG',
             useValue: DevConConfig
