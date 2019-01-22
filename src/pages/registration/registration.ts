@@ -2,7 +2,6 @@ import {Component, Inject} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AppPreferences} from '@ionic-native/app-preferences';
-import {Device} from '@ionic-native/device';
 import {StallFormPage} from '../stallform/stallform.component';
 import {AppConfig} from '../../config/AppConfig';
 import {UserService} from '../../services/user/user.service';
@@ -24,7 +23,6 @@ export class RegistrationPage {
     constructor(private navCtrl: NavController,
                 private formBuilder: FormBuilder,
                 private appPreference: AppPreferences,
-                private device: Device,
                 @Inject('APP_CONFIG') private config: AppConfig,
                 @Inject('USER_SERVICE') private userService: UserService
     ) {
@@ -61,7 +59,6 @@ export class RegistrationPage {
         if (this.resetCountTimer) {
             clearTimeout(this.resetCountTimer);
             this.resetCountTimer = undefined;
-            console.log('timeout cleared', this.formCount);
         }
         this.resetCountTimer = setTimeout(() => {
             this.resetCountTimer = undefined;

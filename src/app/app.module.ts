@@ -3,7 +3,6 @@ import {ErrorHandler, NgModule} from '@angular/core';
 import {IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {StatusBar} from '@ionic-native/status-bar';
-import {AppPreferences} from '@ionic-native/app-preferences';
 import {Device} from '@ionic-native/device';
 
 import {MyApp} from './app.component';
@@ -12,6 +11,8 @@ import {RegistrationPage} from '../pages/registration/registration';
 import {StallFormPage} from '../pages/stallform/stallform.component';
 import {DevConConfig} from '../config/DevConConfig';
 import {UserServiceMock} from '../services/user/user-service-mock';
+import {AppPreferences} from '@ionic-native/app-preferences';
+import {AppPreferencesMock} from '../services/app-preferences/app-preferences-mock';
 
 @NgModule({
     declarations: [
@@ -34,8 +35,11 @@ import {UserServiceMock} from '../services/user/user-service-mock';
     providers: [
         StatusBar,
         SplashScreen,
-        AppPreferences,
         Device,
+        {
+            provide: AppPreferences,
+            useClass: AppPreferencesMock
+        },
         {
             provide: 'USER_SERVICE',
             useClass: UserServiceMock
