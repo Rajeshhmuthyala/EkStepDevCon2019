@@ -11,6 +11,7 @@ import {RegistrationPage} from '../pages/registration/registration';
 import {StallFormPage} from '../pages/stallform/stallform.component';
 import {DevConConfig} from '../config/DevConConfig';
 import {UserServiceMock} from '../services/user/user-service-mock';
+import {ProfilePage} from '../pages/profile/profile';
 import {AppPreferences} from '@ionic-native/app-preferences';
 import {AppPreferencesMock} from '../services/app-preferences/app-preferences-mock';
 
@@ -19,7 +20,8 @@ import {AppPreferencesMock} from '../services/app-preferences/app-preferences-mo
         MyApp,
         HomePage,
         RegistrationPage,
-        StallFormPage
+        StallFormPage,
+        ProfilePage,
     ],
     imports: [
         BrowserModule,
@@ -30,7 +32,8 @@ import {AppPreferencesMock} from '../services/app-preferences/app-preferences-mo
         MyApp,
         HomePage,
         RegistrationPage,
-        StallFormPage
+        StallFormPage,
+        ProfilePage,
     ],
     providers: [
         StatusBar,
