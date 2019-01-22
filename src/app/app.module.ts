@@ -19,6 +19,7 @@ import {AppPreferencesMock} from '../services/app-preferences/app-preferences-mo
 import {TabsPage} from '../pages/tabs/tabs';
 import {TextToSpeechService} from '../services/text-to-speech';
 import {Floor1Component} from '../components/floor-plans/floor-1/floor-1.component';
+import {TelemetryServiceMock} from '../services/telemetry/telemetry-service-mock';
 
 @NgModule({
     declarations: [
@@ -53,12 +54,13 @@ import {Floor1Component} from '../components/floor-plans/floor-1/floor-1.compone
         {
             provide: AppPreferences,
             useClass: AppPreferencesMock
-        },
-        {
+        }, {
             provide: 'USER_SERVICE',
             useClass: UserServiceMock
-        },
-        {
+        }, {
+            provide: 'TELEMETRY_SERVICE',
+            useClass: TelemetryServiceMock
+        }, {
             provide: 'APP_CONFIG',
             useValue: DevConConfig
         }, {
