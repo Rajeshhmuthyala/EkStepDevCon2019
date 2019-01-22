@@ -1,4 +1,3 @@
-export interface CreateUserResponse {
-    qrCode: string;
-    uuid: string;
+export interface CreateUserProfileResponse {
+    userCode: string;
 }

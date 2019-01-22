@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Platform} from 'ionic-angular';
+import {Platform, ModalController} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {RegistrationPage} from '../pages/registration/registration';
 import {PreferenceKey} from './app.constant';

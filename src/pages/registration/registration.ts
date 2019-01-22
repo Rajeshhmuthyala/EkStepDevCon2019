@@ -4,7 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AppPreferences} from '@ionic-native/app-preferences';
 import {AppConfig} from '../../config/AppConfig';
 import {UserService} from '../../services/user/user.service';
-import {CreateUserResponse} from '../../services/user/response';
+import {CreateUserProfileResponse} from '../../services/user/response';
 import {PreferenceKey} from '../../app/app.constant';
 import {HomePage} from '../home/home';
 import {ProfilePage} from '../profile/profile';
@@ -34,10 +34,18 @@ export class RegistrationPage {
     }
 
     public async register() {
-        this.userService.createUser({
-            userName: this.guestRegistrationForm.get('name').value,
-            orgName: this.guestRegistrationForm.get('org').value
-        }).then(async (createUserResponse: CreateUserResponse) => {
+        const createUser = {
+            id: "open-saber.registry.create",
+            request: {
+                 Visitor: {
+                     name: this.guestRegistrationForm.get('name').value,
+                     org: this.guestRegistrationForm.get('org').value,
+                     nCoinsGiven: 100
+                 }
+             }
+        };
+        this.userService.createUser(createUser)
+        .then(async (createUserResponse: CreateUserProfileResponse) => {
             await this.appPreference.store(PreferenceKey.CREATE_USER_RESPONSE, JSON.stringify(createUserResponse));
         }).then(() => {
             const index = this.navCtrl.getActive().index;

@@ -4,6 +4,7 @@ import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
 import { Platform, Content, ViewController } from 'ionic-angular';
 import { ProfilePage } from '../profile/profile';
 
+import { TextToSpeechService } from "../../services/text-to-speech";
 
 @Component({
   templateUrl: './stallform.component.html',
@@ -14,15 +15,18 @@ export class StallFormPage {
   public stallName: string;
   public team: string;
   num: string;
+  public speed: string;
   @ViewChild('content', {read: ElementRef})
 private content: ElementRef;
 private backButtonFunc: any;
   constructor(private qrScanner: QRScanner, private platform: Platform, private navCtrl: NavController,
-     private viewCtrl: ViewController) {
+     private viewCtrl: ViewController, private tts: TextToSpeechService) {
     this.QRScanner();
   }
 
-
+  submitForm() {
+    this.tts.speakText(this.stallName);
+}
   QRScanner() {
     // this.handleBackButton();
     this.qrScanner.prepare()

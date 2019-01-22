@@ -1,22 +1,30 @@
 import {Injectable} from '@angular/core';
 import {UserService} from './user.service';
-import {CreateUserResponse} from './response';
-import {CreateUserRequest} from './requests';
+import {CreateUserProfileResponse} from './response';
+import {
+    CreateUserRpofileRequest,
+    GetUserPrfileRequest,
+    UpdateUserProfileRequest
+} from './requests';
 import {User} from './User';
 
 @Injectable()
 export class UserServiceMock implements UserService {
-    public async createUser(createUserRequest: CreateUserRequest): Promise<CreateUserResponse> {
+    public async createUser(createUserRequest: CreateUserRpofileRequest): Promise<CreateUserProfileResponse> {
         return {
-            uuid: 'SOME_UID',
-            qrCode: 'assets/imgs/mock-qrcode.png'
+            userCode: 'VIS999'
         }
     }
 
-    public async getUser(userId: string): Promise<User> {
+    public async getUser(userId: GetUserPrfileRequest): Promise<User> {
         return {
             userName: 'SOMEONE',
             orgName: 'EkStep'
         };
     }
+
+    public async updateUserProfile(updateUserProfile: UpdateUserProfileRequest): Promise<string> {
+        return 'Profile Updated Succefully';
+    }
+
 }

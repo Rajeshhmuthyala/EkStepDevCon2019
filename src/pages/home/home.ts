@@ -2,7 +2,7 @@ import {Component, Inject, NgZone} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {AppPreferences} from '@ionic-native/app-preferences';
 import {PreferenceKey} from '../../app/app.constant';
-import {CreateUserResponse} from '../../services/user/response';
+import {GetUserPrfileRequest} from '../../services/user/requests';
 import {User} from '../../services/user/User';
 import {UserService} from '../../services/user/user.service';
 
@@ -28,19 +28,19 @@ export class HomePage {
     }
 
     private async fetchUserDetails() {
-        const createUserResponse: CreateUserResponse = await this.appPreference.fetch(PreferenceKey.CREATE_USER_RESPONSE);
+        const createUserResponse: GetUserPrfileRequest = await this.appPreference.fetch(PreferenceKey.CREATE_USER_RESPONSE);
 
-        const user: User = await this.userService.getUser(createUserResponse.uuid);
+        const user: User = await this.userService.getUser(createUserResponse);
 
-        this.zone.run(() => {
-            this.name = user.userName;
-            this.org = user.orgName;
-            this.qrcode = createUserResponse.qrCode;
-        });
+        // this.zone.run(() => {
+        //     this.name = user.userName;
+        //     this.org = user.orgName;
+        //     this.qrcode = createUserResponse.userCode;
+        // });
 
-        this.name = user.userName;
-        this.org = user.orgName;
-        this.qrcode = createUserResponse.qrCode;
+        // this.name = user.userName;
+        // this.org = user.orgName;
+        // this.qrcode = createUserResponse.qrCode;
     }
 
 }
