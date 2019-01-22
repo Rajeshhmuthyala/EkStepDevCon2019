@@ -14,6 +14,7 @@ import {UserServiceMock} from '../services/user/user-service-mock';
 import {ProfilePage} from '../pages/profile/profile';
 import {AppPreferences} from '@ionic-native/app-preferences';
 import {AppPreferencesMock} from '../services/app-preferences/app-preferences-mock';
+import {TabsPage} from '../pages/tabs/tabs';
 
 @NgModule({
     declarations: [
@@ -22,6 +23,7 @@ import {AppPreferencesMock} from '../services/app-preferences/app-preferences-mo
         RegistrationPage,
         StallFormPage,
         ProfilePage,
+        TabsPage
     ],
     imports: [
         BrowserModule,
@@ -34,6 +36,7 @@ import {AppPreferencesMock} from '../services/app-preferences/app-preferences-mo
         RegistrationPage,
         StallFormPage,
         ProfilePage,
+        TabsPage
     ],
     providers: [
         StatusBar,
