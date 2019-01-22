@@ -83,6 +83,7 @@
     <plugin name="cordova-plugin-app-preferences" spec="0.99.3" />
     <plugin name="cordova-plugin-qrcodejs" spec="https://github.com/MenelicSoftware/cordova-plugin-qrcodejs.git" />
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
+    <plugin name="cordova-plugin-qrscanner" spec="2.6.0"/>
     <engine name="android" spec="7.1.4"/>
     <engine name="ios" spec="4.5.5"/>
 </widget>
