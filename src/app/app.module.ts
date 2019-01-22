@@ -12,13 +12,17 @@ import {RegistrationPage} from '../pages/registration/registration';
 import {StallFormPage} from '../pages/stallform/stallform.component';
 import {DevConConfig} from '../config/DevConConfig';
 import {UserServiceMock} from '../services/user/user-service-mock';
+import {ProfilePage} from '../pages/profile/profile';
+//import {StallNamePage} from '../pages/stall-name/stall-name';
 
 @NgModule({
     declarations: [
         MyApp,
         HomePage,
         RegistrationPage,
-        StallFormPage
+        StallFormPage,
+        ProfilePage,
+       // StallNamePage
     ],
     imports: [
         BrowserModule,
@@ -29,7 +33,9 @@ import {UserServiceMock} from '../services/user/user-service-mock';
         MyApp,
         HomePage,
         RegistrationPage,
-        StallFormPage
+        StallFormPage,
+        ProfilePage,
+     //   StallNamePage
     ],
     providers: [
         StatusBar,

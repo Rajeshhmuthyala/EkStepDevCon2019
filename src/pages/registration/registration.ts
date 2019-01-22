@@ -1,14 +1,18 @@
-import {Component, Inject} from '@angular/core';
-import {NavController} from 'ionic-angular';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AppPreferences} from '@ionic-native/app-preferences';
-import {Device} from '@ionic-native/device';
-import {StallFormPage} from '../stallform/stallform.component';
+import {Inject} from '@angular/core';
 import {AppConfig} from '../../config/AppConfig';
 import {UserService} from '../../services/user/user.service';
 import {CreateUserResponse} from '../../services/user/response';
-import {PreferenceKey} from '../../app/app.constant';
-import {HomePage} from '../home/home';
+import { Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { HomePage } from '../home/home';
+import { AppPreferences } from '@ionic-native/app-preferences';
+import { Device } from '@ionic-native/device';
+import { PreferenceKey } from '../../app/app.constant';
+import { StallFormPage } from '../stallform/stallform.component';
+import {ProfilePage} from '../profile/profile';
+
+declare let cordova;
 
 @Component({
     selector: 'page-registration',
@@ -51,12 +55,12 @@ export class RegistrationPage {
 
     onClickToNavigateToStallForm() {
         this.formCount++;
-        if (this.formCount === 10) {
+        if (this.formCount === 5) {
             clearTimeout(this.resetCountTimer);
             this.resetCountTimer = undefined;
             this.formCount = 0;
             alert('moving to form page!');
-            this.navCtrl.push(StallFormPage, {});
+            this.navCtrl.push(ProfilePage, {});
         }
         if (this.resetCountTimer) {
             clearTimeout(this.resetCountTimer);
@@ -67,6 +71,21 @@ export class RegistrationPage {
             this.resetCountTimer = undefined;
             this.formCount = 0;
         }, 1000);
+      }
 
-    }
+  // onClickToNavigateToStallForm() {
+  //   this.formCount++;
+  //   if(this.formCount === 5) {
+  //     clearTimeout(this.resetCountTimer);
+  //     this.resetCountTimer = undefined;
+  //     this.formCount = 0;
+  //     alert('moving to form page!');
+  //     this.navCtrl.push(ProfilePage, {});
+  //   }
+  //   if(this.resetCountTimer) {
+  //     clearTimeout(this.resetCountTimer);
+  //     this.resetCountTimer = undefined;
+  //     console.log('timeout cleared', this.formCount);
+  //   }
+
 }
