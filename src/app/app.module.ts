@@ -18,6 +18,7 @@ import {AppPreferences} from '@ionic-native/app-preferences';
 import {AppPreferencesMock} from '../services/app-preferences/app-preferences-mock';
 import {TabsPage} from '../pages/tabs/tabs';
 import {TextToSpeechService} from '../services/text-to-speech';
+import {Floor1Component} from '../components/floor-plans/floor-1/floor-1.component';
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import {TextToSpeechService} from '../services/text-to-speech';
         RegistrationPage,
         StallQRScanPage,
         ProfilePage,
-        TabsPage
+        TabsPage,
+        Floor1Component
     ],
     imports: [
         BrowserModule,
