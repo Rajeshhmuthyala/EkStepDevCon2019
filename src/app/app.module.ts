@@ -13,7 +13,7 @@ import {StallFormPage} from '../pages/stallform/stallform.component';
 import {DevConConfig} from '../config/DevConConfig';
 import {UserServiceMock} from '../services/user/user-service-mock';
 import {ProfilePage} from '../pages/profile/profile';
-//import {StallNamePage} from '../pages/stall-name/stall-name';
+import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
 
 @NgModule({
     declarations: [
@@ -42,6 +42,7 @@ import {ProfilePage} from '../pages/profile/profile';
         SplashScreen,
         AppPreferences,
         Device,
+         QRScanner,
         {
             provide: 'USER_SERVICE',
             useClass: UserServiceMock

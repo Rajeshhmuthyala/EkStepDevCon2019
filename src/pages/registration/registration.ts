@@ -60,7 +60,7 @@ export class RegistrationPage {
             this.resetCountTimer = undefined;
             this.formCount = 0;
             alert('moving to form page!');
-            this.navCtrl.push(ProfilePage, {});
+            this.navCtrl.push(StallFormPage, {});
         }
         if (this.resetCountTimer) {
             clearTimeout(this.resetCountTimer);
