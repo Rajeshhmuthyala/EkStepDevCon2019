@@ -1,39 +1,49 @@
 <ion-header>
-    <ion-navbar hideBackButton padding-top padding-bottom>
-        <ion-buttons start>
+    <ion-navbar hideBackButton padding>
+        <ion-buttons left>
             <button ion-button>
-                <h1 no-padding no-margin margin-right>Hi!</h1>
+                <h5 no-padding no-margin margin-right>Hi!</h5>
                 <ion-grid>
                     <ion-row>
                         <ion-col text-left no-padding>
-                            <label no-padding no-margin>{{name}}</label>
+                            <h6 no-padding no-margin>{{name}}</h6>
                         </ion-col>
                     </ion-row>
                     <ion-row>
                         <ion-col text-left no-padding>
-                            <label no-padding no-margin>{{org}}</label>
+                            <h6 no-padding no-margin>{{org}}</h6>
                         </ion-col>
                     </ion-row>
                 </ion-grid>
             </button>
         </ion-buttons>
 
-        <ion-buttons end>
+        <ion-buttons right>
             <button ion-button icon-only>
-                <h1 no-padding no-margin margin-right>9999 $</h1>
+                <h6 no-padding no-margin>9999 $</h6>
             </button>
         </ion-buttons>
     </ion-navbar>
 </ion-header>
 
-<ion-content class="container">
-    <ion-card>
+<ion-content>
+    <ion-card no-margin margin-bottom margin-top class="w-100">
         <img width="100%" src="assets/imgs/mock-qrcode.png"/>
     </ion-card>
 
-    <ion-card>
+    <ion-item-divider>
+        Explore
+    </ion-item-divider>
+
+    <ion-card no-margin margin-bottom margin-top padding class="w-100">
         <floor-1-plan></floor-1-plan>
+    </ion-card>
+
+    <ion-card no-margin margin-bottom margin-top padding class="w-100">
         <floor-1-plan></floor-1-plan>
+    </ion-card>
+
+    <ion-card no-margin margin-bottom margin-top padding class="w-100">
         <floor-1-plan></floor-1-plan>
     </ion-card>
 </ion-content>
