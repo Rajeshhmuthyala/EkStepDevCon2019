@@ -1,5 +1,7 @@
-import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { StallFormPage } from '../stallform/stallform.component';
+// import {StallNamePage} from '../stall-name/stall-name';
 
 /**
  * Generated class for the ProfilePage page.
@@ -14,15 +16,19 @@ import {IonicPage, NavController, NavParams} from 'ionic-angular';
     templateUrl: 'profile.html',
 })
 export class ProfilePage {
+profile: any;
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.profile = this.navParams.get('text');
+    console.log(this.profile);
+  }
 
-    constructor(public navCtrl: NavController, public navParams: NavParams) {
-    }
+  ionViewDidLoad() {
+    // this.profile = this.navParams.get('text');
+    console.log('ionViewDidLoad ProfilePage', this.profile);
+  }
 
-    ionViewDidLoad() {
-        console.log('ionViewDidLoad ProfilePage');
-    }
-
-    Submit() {
-    }
+  Submit(){
+    this.navCtrl.push(StallFormPage);
+  }
 
 }
