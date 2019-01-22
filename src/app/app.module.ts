@@ -20,8 +20,11 @@ import {TabsPage} from '../pages/tabs/tabs';
 import {TextToSpeechService} from '../services/text-to-speech';
 import {Floor1Component} from '../components/floor-plans/floor-1/floor-1.component';
 import {TelemetryServiceMock} from '../services/telemetry/telemetry-service-mock';
+import { Ionic2RatingModule } from 'ionic2-rating';
+import {StallNamePage} from '../pages/stall-name/stall-name';
 import {CustomSplashComponent} from '../pages/custom-splash/custom-splash.component';
 import {LottieAnimationViewModule} from 'ng-lottie';
+
 
 @NgModule({
     declarations: [
@@ -33,11 +36,13 @@ import {LottieAnimationViewModule} from 'ng-lottie';
         TabsPage,
         CustomSplashComponent,
         Floor1Component,
+        StallNamePage
     ],
     imports: [
         BrowserModule,
         IonicModule.forRoot(MyApp),
-        LottieAnimationViewModule.forRoot()
+        LottieAnimationViewModule.forRoot(),
+        Ionic2RatingModule
     ],
     bootstrap: [IonicApp],
     entryComponents: [
@@ -47,7 +52,8 @@ import {LottieAnimationViewModule} from 'ng-lottie';
         RegistrationPage,
         StallQRScanPage,
         ProfilePage,
-        TabsPage
+        TabsPage,
+        StallNamePage
     ],
     providers: [
         StatusBar,

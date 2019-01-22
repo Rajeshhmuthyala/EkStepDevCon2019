@@ -10,6 +10,8 @@ import {TabsPage} from '../tabs/tabs';
 import {StallQRScanPage} from '../stall-qr-scan/stall-qr-scan.component';
 import {TelemetryService} from '../../services/telemetry/telemetry-services';
 import {Telemetry_IDs} from '../../services/telemetry/base-telemetry';
+import { PopoverController } from 'ionic-angular';
+import { ProfilePage } from '../profile/profile';
 
 @Component({
     selector: 'page-registration',
@@ -25,6 +27,7 @@ export class RegistrationPage {
     constructor(private navCtrl: NavController,
                 private formBuilder: FormBuilder,
                 private appPreference: AppPreferences,
+                public popoverCtrl: PopoverController,
                 @Inject('APP_CONFIG') private config: AppConfig,
                 @Inject('USER_SERVICE') private userService: UserService,
                 @Inject('TELEMETRY_SERVICE') private telemetryService: TelemetryService
@@ -69,7 +72,12 @@ export class RegistrationPage {
             this.resetCountTimer = undefined;
             this.formCount = 0;
             alert('moving to form page!');
-            this.navCtrl.push(StallQRScanPage, {});
+            const popover = this.popoverCtrl.create(ProfilePage);
+            popover.present();
+
+            popover.onDidDismiss(() => {
+                this.navCtrl.push(StallQRScanPage, {});
+            });
         }
         if (this.resetCountTimer) {
             clearTimeout(this.resetCountTimer);
