@@ -13,6 +13,7 @@ import {StallFormPage} from '../pages/stallform/stallform.component';
 import {DevConConfig} from '../config/DevConConfig';
 import {UserServiceMock} from '../services/user/user-service-mock';
 import {ProfilePage} from '../pages/profile/profile';
+import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
 import {AppPreferences} from '@ionic-native/app-preferences';
 import {AppPreferencesMock} from '../services/app-preferences/app-preferences-mock';
 import { TextToSpeechService } from '../services/text-to-speech';
@@ -41,6 +42,7 @@ import { TextToSpeechService } from '../services/text-to-speech';
         StatusBar,
         SplashScreen,
         Device,
+         QRScanner,
         TextToSpeech,
         TextToSpeechService,
         {
