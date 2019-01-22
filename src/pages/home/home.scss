@@ -1,4 +1,11 @@
 page-home{
+    .qr-code {
+        display: block;
+        width: 70% !important;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
     .box {
         height: auto;
         width: 98%;
@@ -11,15 +18,16 @@ page-home{
         background: #f8f8f8 !important;
  
     }
-.segment-md .segment-button{
-  color: black;
-}
+
+    .segment-md .segment-button{
+    color: black;
+    }
 
     .toolbar .segment-md .segment-button.activated,
     .toolbar .segment-md .segment-button.segment-activated {
         background-color: #327eff !important;
         border-radius: 2px;
-   border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
     }
 }
