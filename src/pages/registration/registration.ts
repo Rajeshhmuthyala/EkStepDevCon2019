@@ -71,7 +71,7 @@ export class RegistrationPage {
             clearTimeout(this.resetCountTimer);
             this.resetCountTimer = undefined;
             this.formCount = 0;
-            alert('moving to form page!');
+
             const popover = this.popoverCtrl.create(ProfilePage);
             popover.present();
 

@@ -28,13 +28,12 @@ ion-card img {
     text-align: center;
     margin-top: -10px;
     p {
-
         width: 120px;
         margin-left: auto;
         margin-right: auto;
         position: relative;
         top: 50%;
-        transform: translateY(-50%);
+        transform: translateY(-50%) rotate(90deg);
         color: white;
         font-size: 1em;
     }
@@ -46,7 +45,6 @@ ion-col.col {
 ion-row.toprow.row {
     height: 80px;
     p {
-
         width: 120px;
         margin-left: auto;
         margin-right: auto;
@@ -60,7 +58,6 @@ ion-row.toprow.row {
 ion-row.footerrow {
     height: 80px;
     p {
-
         width: 120px;
         margin-left: auto;
         margin-right: auto;
