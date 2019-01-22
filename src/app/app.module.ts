@@ -35,9 +35,8 @@ import {LottieAnimationViewModule} from 'ng-lottie';
         ProfilePage,
         TabsPage,
         Floor1Component,
-        Floor2Component
+        Floor2Component,
         CustomSplashComponent,
-        Floor1Component,
         StallNamePage
     ],
     imports: [
