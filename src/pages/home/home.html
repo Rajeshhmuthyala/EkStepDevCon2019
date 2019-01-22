@@ -1,22 +1,32 @@
-<ion-content class="container">
-        <ion-card style="height: 30% !important; margin-top: 5px; border-radius: 5px; ">
-                <ion-slides autoplay="3000" loop="true" speed="2000">
-                  <ion-slide>
-                      <img src="assets/imgs/img1.jpg"/>
-                  </ion-slide>
-                  <ion-slide>
-                      <img src="assets/imgs/img2.jpg"/>
-                  </ion-slide>
-                  <ion-slide>
-                      <img src="assets/imgs/ekstep.jpg"/>
-                  </ion-slide>
-                </ion-slides>
-              </ion-card>
-    <ion-card class="profile">
-        <ion-card-header> Name: {{name}} </ion-card-header>
-        <ion-card-content>Organisation: {{org}} </ion-card-content>
-    </ion-card>
+<ion-header>
+    <ion-navbar padding-top padding-bottom>
+        <ion-buttons start>
+            <button ion-button>
+                <h1 no-padding no-margin margin-right>Hi!</h1>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col text-left no-padding>
+                            <label no-padding no-margin>{{name}}</label>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col text-left no-padding>
+                            <label no-padding no-margin>{{org}}</label>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </button>
+        </ion-buttons>
 
+        <ion-buttons end>
+            <button ion-button icon-only>
+                <h1 no-padding no-margin margin-right>9999 $</h1>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="container">
     <ion-card>
         <img width="100%" src="assets/imgs/mock-qrcode.png"/>
     </ion-card>
