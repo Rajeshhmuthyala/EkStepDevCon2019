@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {Platform, ModalController} from 'ionic-angular';
+import {Platform} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {RegistrationPage} from '../pages/registration/registration';
 import {PreferenceKey} from './app.constant';
 import {AppPreferences} from '@ionic-native/app-preferences';
-import {HomePage} from '../pages/home/home';
 import {SplashScreen} from '@ionic-native/splash-screen';
+import {TabsPage} from '../pages/tabs/tabs';
 
 @Component({
     templateUrl: 'app.html'
@@ -28,7 +28,7 @@ export class MyApp implements OnInit {
             this.statusBar.styleDefault();
 
             if (await this.isAlreadyRegistered()) {
-                this.rootPage = HomePage;
+                this.rootPage = TabsPage;
             } else {
                 this.rootPage = RegistrationPage;
             }

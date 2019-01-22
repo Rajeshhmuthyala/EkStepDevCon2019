@@ -13,7 +13,6 @@ import {UserService} from '../../services/user/user.service';
 export class HomePage {
   name: string;
   org : string;
-  qrcode: string;
 
   constructor(
       private navCtrl: NavController,
@@ -32,15 +31,13 @@ export class HomePage {
 
         const user: User = await this.userService.getUser(createUserResponse);
 
-        // this.zone.run(() => {
-        //     this.name = user.userName;
-        //     this.org = user.orgName;
-        //     this.qrcode = createUserResponse.userCode;
-        // });
+        this.zone.run(() => {
+            this.name = user.userName;
+            this.org = user.orgName;
+        });
 
-        // this.name = user.userName;
-        // this.org = user.orgName;
-        // this.qrcode = createUserResponse.qrCode;
+        this.name = user.userName;
+        this.org = user.orgName;
     }
 
 }
