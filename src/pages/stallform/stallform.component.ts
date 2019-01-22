@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { NavParams } from "ionic-angular";
+import { TextToSpeechService } from "../../services/text-to-speech";
 
 @Component({
     templateUrl: './stallform.component.html',
@@ -9,12 +9,13 @@ export class StallFormPage {
 
     public stallName: string;
     public team: string;
+    public speed: string;
 
-    constructor() {
+    constructor(private tts: TextToSpeechService) {
         
     }
 
     submitForm() {
-        console.log(this.stallName);
+        this.tts.speakText(this.stallName);
     }
 }
