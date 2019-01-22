@@ -3,7 +3,6 @@ import {ErrorHandler, NgModule} from '@angular/core';
 import {IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {StatusBar} from '@ionic-native/status-bar';
-import {AppPreferences} from '@ionic-native/app-preferences';
 import {Device} from '@ionic-native/device';
 
 import {MyApp} from './app.component';
@@ -14,6 +13,8 @@ import {DevConConfig} from '../config/DevConConfig';
 import {UserServiceMock} from '../services/user/user-service-mock';
 import {ProfilePage} from '../pages/profile/profile';
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
+import {AppPreferences} from '@ionic-native/app-preferences';
+import {AppPreferencesMock} from '../services/app-preferences/app-preferences-mock';
 
 @NgModule({
     declarations: [
@@ -22,7 +23,6 @@ import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
         RegistrationPage,
         StallFormPage,
         ProfilePage,
-       // StallNamePage
     ],
     imports: [
         BrowserModule,
@@ -35,14 +35,16 @@ import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
         RegistrationPage,
         StallFormPage,
         ProfilePage,
-     //   StallNamePage
     ],
     providers: [
         StatusBar,
         SplashScreen,
-        AppPreferences,
         Device,
          QRScanner,
+        {
+            provide: AppPreferences,
+            useClass: AppPreferencesMock
+        },
         {
             provide: 'USER_SERVICE',
             useClass: UserServiceMock

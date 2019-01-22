@@ -4,8 +4,8 @@ import {StatusBar} from '@ionic-native/status-bar';
 import {RegistrationPage} from '../pages/registration/registration';
 import {PreferenceKey} from './app.constant';
 import {AppPreferences} from '@ionic-native/app-preferences';
-import {Device} from '@ionic-native/device';
 import {HomePage} from '../pages/home/home';
+import {SplashScreen} from '@ionic-native/splash-screen';
 
 @Component({
     templateUrl: 'app.html'
@@ -17,12 +17,14 @@ export class MyApp implements OnInit {
         private platform: Platform,
         private statusBar: StatusBar,
         private appPreference: AppPreferences,
-        private device: Device
+        public splashScreen: SplashScreen,
     ) {
     }
 
     public async ngOnInit() {
         return this.platform.ready().then(async () => {
+            this.splashScreen.hide();
+
             this.statusBar.styleDefault();
 
             if (await this.isAlreadyRegistered()) {

@@ -12,8 +12,8 @@ import { StallFormPage } from '../stallform/stallform.component';
 
 @IonicPage()
 @Component({
-  selector: 'page-profile',
-  templateUrl: 'profile.html',
+    selector: 'page-profile',
+    templateUrl: 'profile.html',
 })
 export class ProfilePage {
 profile: any;
