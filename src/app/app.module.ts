@@ -4,6 +4,7 @@ import {IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {StatusBar} from '@ionic-native/status-bar';
 import {Device} from '@ionic-native/device';
+import { TextToSpeech } from '@ionic-native/text-to-speech';
 
 import {MyApp} from './app.component';
 import {HomePage} from '../pages/home/home';
@@ -14,6 +15,7 @@ import {UserServiceMock} from '../services/user/user-service-mock';
 import {ProfilePage} from '../pages/profile/profile';
 import {AppPreferences} from '@ionic-native/app-preferences';
 import {AppPreferencesMock} from '../services/app-preferences/app-preferences-mock';
+import { TextToSpeechService } from '../services/text-to-speech';
 
 @NgModule({
     declarations: [
@@ -39,6 +41,8 @@ import {AppPreferencesMock} from '../services/app-preferences/app-preferences-mo
         StatusBar,
         SplashScreen,
         Device,
+        TextToSpeech,
+        TextToSpeechService,
         {
             provide: AppPreferences,
             useClass: AppPreferencesMock
