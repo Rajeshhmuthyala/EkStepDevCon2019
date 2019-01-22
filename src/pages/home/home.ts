@@ -14,7 +14,7 @@ import {StallNamePage} from '../stall-name/stall-name';
 export class HomePage {
   name: string;
   org : string;
-
+  segmentType = "first";
   constructor(
       private navCtrl: NavController,
       private appPreference: AppPreferences,
