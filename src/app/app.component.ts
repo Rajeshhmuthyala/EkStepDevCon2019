@@ -1,38 +1,55 @@
 import {Component, OnInit} from '@angular/core';
-import {Platform} from 'ionic-angular';
+import {ModalController, Platform} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {RegistrationPage} from '../pages/registration/registration';
 import {PreferenceKey} from '../config/constants';
 import {AppPreferences} from '@ionic-native/app-preferences';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {TabsPage} from '../pages/tabs/tabs';
+import {CustomSplashComponent} from '../pages/custom-splash/custom-splash.component';
 
 @Component({
     templateUrl: 'app.html'
 })
 export class MyApp implements OnInit {
-    rootPage: any = RegistrationPage;
+    rootPage: any = null;
 
     constructor(
         private platform: Platform,
         private statusBar: StatusBar,
         private appPreference: AppPreferences,
-        public splashScreen: SplashScreen,
+        private splashScreen: SplashScreen,
+        private modalCtrl: ModalController
     ) {
     }
 
     public async ngOnInit() {
-        return this.platform.ready().then(async () => {
-            this.splashScreen.hide();
+        this.displayCustomSplashModal().then(() => {
+            return this.platform.ready().then(async () => {
+                this.statusBar.styleDefault();
 
-            this.statusBar.styleDefault();
-
-            if (await this.isAlreadyRegistered()) {
-                this.rootPage = TabsPage;
-            } else {
-                this.rootPage = RegistrationPage;
-            }
+                if (await this.isAlreadyRegistered()) {
+                    this.rootPage = TabsPage;
+                } else {
+                    this.rootPage = RegistrationPage;
+                }
+            });
         });
+    }
+
+    private async displayCustomSplashModal() {
+        return new Promise((resolve => {
+            this.splashScreen.hide();
+            const splashModal = this.modalCtrl.create(CustomSplashComponent);
+            splashModal.present({
+                animate: false
+            });
+
+            setTimeout(() => {
+                splashModal.dismiss();
+                resolve()
+            }, 4000);
+        }));
     }
 
     private async isAlreadyRegistered(): Promise<string | undefined> {

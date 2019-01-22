@@ -8,6 +8,10 @@ import {CreateUserProfileResponse} from '../../services/user/response';
 import {PreferenceKey} from '../../config/constants';
 import {TabsPage} from '../tabs/tabs';
 import {StallQRScanPage} from '../stall-qr-scan/stall-qr-scan.component';
+import {TelemetryService} from '../../services/telemetry/telemetry-services';
+import {Telemetry_IDs} from '../../services/telemetry/base-telemetry';
+import { PopoverController } from 'ionic-angular';
+import { ProfilePage } from '../profile/profile';
 
 @Component({
     selector: 'page-registration',
@@ -23,8 +27,10 @@ export class RegistrationPage {
     constructor(private navCtrl: NavController,
                 private formBuilder: FormBuilder,
                 private appPreference: AppPreferences,
+                public popoverCtrl: PopoverController,
                 @Inject('APP_CONFIG') private config: AppConfig,
-                @Inject('USER_SERVICE') private userService: UserService
+                @Inject('USER_SERVICE') private userService: UserService,
+                @Inject('TELEMETRY_SERVICE') private telemetryService: TelemetryService
     ) {
         this.orgList = this.config.orgList;
         this.guestRegistrationForm = this.formBuilder.group({
@@ -49,6 +55,13 @@ export class RegistrationPage {
             await this.appPreference.store(PreferenceKey.USER_CODE, createUserResponse.userCode);
         }).then(() => {
             return this.navCtrl.setRoot(TabsPage);
+        }).then(async () => {
+            return this.telemetryService.generateRegisterTelemetry({
+                eid: Telemetry_IDs.DC_REGISTER,
+                visitorId: await this.appPreference.fetch(PreferenceKey.USER_CODE),
+                visitorName: '',
+                edata: {}
+            });
         })
     }
 
@@ -59,7 +72,12 @@ export class RegistrationPage {
             this.resetCountTimer = undefined;
             this.formCount = 0;
             alert('moving to form page!');
-            this.navCtrl.push(StallQRScanPage, {});
+            const popover = this.popoverCtrl.create(ProfilePage);
+            popover.present();
+
+            popover.onDidDismiss(() => {
+                this.navCtrl.push(StallQRScanPage, {});
+            });
         }
         if (this.resetCountTimer) {
             clearTimeout(this.resetCountTimer);

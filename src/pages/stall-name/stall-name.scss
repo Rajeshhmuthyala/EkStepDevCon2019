@@ -1,0 +1,28 @@
+ul {
+  padding: 0px;
+
+  &.rating li {
+    padding: 5px 10px !important;
+    background: none;
+    color: #ffb400;
+
+    ion-icon {
+      font-size: 30px;
+    }
+  }
+}
+
+ion-card.cards-list-demo ion-card-header {
+    color: map-get($colors, primary);
+  }
+
+  .card-header{
+  border-bottom: 1px solid #ddd;
+  }
+
+  .card-footer{
+    border-top: 1px solid #ddd;
+    }
+  .p-16{
+      padding: 16px
+  }

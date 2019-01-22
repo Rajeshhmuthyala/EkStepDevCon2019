@@ -19,6 +19,12 @@ import {AppPreferencesMock} from '../services/app-preferences/app-preferences-mo
 import {TabsPage} from '../pages/tabs/tabs';
 import {TextToSpeechService} from '../services/text-to-speech';
 import {Floor1Component} from '../components/floor-plans/floor-1/floor-1.component';
+import {TelemetryServiceMock} from '../services/telemetry/telemetry-service-mock';
+import { Ionic2RatingModule } from 'ionic2-rating';
+import {StallNamePage} from '../pages/stall-name/stall-name';
+import {CustomSplashComponent} from '../pages/custom-splash/custom-splash.component';
+import {LottieAnimationViewModule} from 'ng-lottie';
+
 
 @NgModule({
     declarations: [
@@ -28,20 +34,26 @@ import {Floor1Component} from '../components/floor-plans/floor-1/floor-1.compone
         StallQRScanPage,
         ProfilePage,
         TabsPage,
-        Floor1Component
+        CustomSplashComponent,
+        Floor1Component,
+        StallNamePage
     ],
     imports: [
         BrowserModule,
-        IonicModule.forRoot(MyApp)
+        IonicModule.forRoot(MyApp),
+        LottieAnimationViewModule.forRoot(),
+        Ionic2RatingModule
     ],
     bootstrap: [IonicApp],
     entryComponents: [
+        CustomSplashComponent,
         MyApp,
         HomePage,
         RegistrationPage,
         StallQRScanPage,
         ProfilePage,
-        TabsPage
+        TabsPage,
+        StallNamePage
     ],
     providers: [
         StatusBar,
@@ -51,14 +63,15 @@ import {Floor1Component} from '../components/floor-plans/floor-1/floor-1.compone
         TextToSpeech,
         TextToSpeechService,
         {
+            provide: 'TELEMETRY_SERVICE',
+            useClass: TelemetryServiceMock
+        }, {
             provide: AppPreferences,
             useClass: AppPreferencesMock
-        },
-        {
+        }, {
             provide: 'USER_SERVICE',
             useClass: UserServiceMock
-        },
-        {
+        }, {
             provide: 'APP_CONFIG',
             useValue: DevConConfig
         }, {
