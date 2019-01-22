@@ -15,6 +15,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class StallNamePage {
 
+  storeOptions = {
+    title: 'Select Store',
+    cssClass: 'select-box'
+  };
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 

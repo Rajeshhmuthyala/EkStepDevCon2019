@@ -14,34 +14,53 @@
 
 
 <ion-content class=" cards-bg">
-  <ion-card class="cards-list-demo">
-    <div class="card-header">
-      <ion-card-header>
+  <ion-navbar>
+    <ion-select [(ngModel)]="store" interface="popover" [selectOptions]="storeOptions">
+      <ion-option value="store1" selected>Store 1</ion-option>
+      <ion-option value="store2">Store 2</ion-option>
+      <ion-option value="store3">Store 3</ion-option>
+      <ion-option value="store4">Store 4</ion-option>
+      <ion-option value="store5">Store 5</ion-option>
+    </ion-select>
+    <ion-buttons end>
+      <button ion-button color="danger" round>
+        <h6 no-padding no-margin float-end>9999 $</h6>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+
+
+  <ion-card style="color: white; background: -webkit-linear-gradient(left, rgba(72,158,234,1) 5%, rgba(72,158,234,1) 18%, rgba(72,158,234,1) 20%, rgba(31,127,229,1) 92%, rgba(31,127,229,1) 93%);">
+    <ion-card-header class="card-header">
+      <h1>
         Idea Name
-      </ion-card-header>
+      </h1>
+    </ion-card-header>
+
+      <div class="p-16"><b>Description:</b>
+    <p style="color: white">
+      The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.
     </div>
 
-    <ion-card-content>
-      The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.
-    </ion-card-content>
+      <div class="p-16"><b>Advanced:</b>
+        <p style="color: white">parents and students</p>
+      </div>
 
-   <ion-row>
-     <ion-col class="p-16"><b>Advanced:</b></ion-col>
-   </ion-row>
-
+        <div style="margin-top: 10px; padding: 16px"><b>Rate Us:</b></div>
     <ion-row no-padding>
-      <ion-col>
+      <ion-col style="margin-top: -30px">
         <rating [(ngModel)]="rate" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half"
           starIconName="star" nullable="false" (ngModelChange)="onModelChange($event)">
         </rating>
       </ion-col>
     </ion-row>
     <ion-row class="cardfooter">
-      <ion-col class="card-footer">
-        <button ion-button full clear>BUY
+      <ion-col>
+        <button ion-button full style="background-color:yellow; color: black" round>BUY
         </button>
       </ion-col>
     </ion-row>
   </ion-card>
- 
+
 </ion-content>
