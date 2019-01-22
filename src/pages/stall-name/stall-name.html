@@ -1,0 +1,47 @@
+<!--
+  Generated template for the StallNamePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>stallName</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class=" cards-bg">
+  <ion-card class="cards-list-demo">
+    <div class="card-header">
+      <ion-card-header>
+        Idea Name
+      </ion-card-header>
+    </div>
+
+    <ion-card-content>
+      The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.
+    </ion-card-content>
+
+   <ion-row>
+     <ion-col class="p-16"><b>Advanced:</b></ion-col>
+   </ion-row>
+
+    <ion-row no-padding>
+      <ion-col>
+        <rating [(ngModel)]="rate" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half"
+          starIconName="star" nullable="false" (ngModelChange)="onModelChange($event)">
+        </rating>
+      </ion-col>
+    </ion-row>
+    <ion-row class="cardfooter">
+      <ion-col class="card-footer">
+        <button ion-button full clear>BUY
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+ 
+</ion-content>

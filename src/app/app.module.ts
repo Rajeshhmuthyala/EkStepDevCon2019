@@ -20,6 +20,9 @@ import {TabsPage} from '../pages/tabs/tabs';
 import {TextToSpeechService} from '../services/text-to-speech';
 import {Floor1Component} from '../components/floor-plans/floor-1/floor-1.component';
 import {TelemetryServiceMock} from '../services/telemetry/telemetry-service-mock';
+import { Ionic2RatingModule } from 'ionic2-rating';
+import {StallNamePage} from '../pages/stall-name/stall-name';
+
 
 @NgModule({
     declarations: [
@@ -29,11 +32,13 @@ import {TelemetryServiceMock} from '../services/telemetry/telemetry-service-mock
         StallQRScanPage,
         ProfilePage,
         TabsPage,
-        Floor1Component
+        Floor1Component,
+        StallNamePage
     ],
     imports: [
         BrowserModule,
-        IonicModule.forRoot(MyApp)
+        IonicModule.forRoot(MyApp),
+        Ionic2RatingModule
     ],
     bootstrap: [IonicApp],
     entryComponents: [
@@ -42,7 +47,8 @@ import {TelemetryServiceMock} from '../services/telemetry/telemetry-service-mock
         RegistrationPage,
         StallQRScanPage,
         ProfilePage,
-        TabsPage
+        TabsPage,
+        StallNamePage
     ],
     providers: [
         StatusBar,
