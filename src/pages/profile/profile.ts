@@ -1,5 +1,10 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {IonicPage,
+    NavController,
+    NavParams,
+    ViewController
+} from 'ionic-angular';
+import { StallQRScanPage } from '../stall-qr-scan/stall-qr-scan.component';
 
 @IonicPage()
 @Component({
@@ -9,12 +14,19 @@ import {IonicPage, NavController, NavParams} from 'ionic-angular';
 export class ProfilePage {
     userCode: any;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams) {
-        this.userCode = this.navParams.get('userCode');
-        console.log(this.userCode);
+    constructor(
+        public navCtrl: NavController,
+        public navParams: NavParams,
+        public viewCtrl: ViewController) {
+        // this.userCode = this.navParams.get('userCode');
+        // console.log(this.userCode);
     }
 
     ionViewDidLoad() {
-        console.log('ionViewDidLoad ProfilePage', this.userCode);
+        // console.log('ionViewDidLoad ProfilePage', this.userCode);
+    }
+
+    openQRScanner() {
+        this.viewCtrl.dismiss();
     }
 }

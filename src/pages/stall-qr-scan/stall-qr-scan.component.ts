@@ -31,7 +31,8 @@ export class StallQRScanPage {
                     this.qrScanner.show();
                     let scanSub = this.qrScanner.scan().subscribe((text: string) => {
 
-                        this.navCtrl.push(ProfilePage, {userCode: text});
+                        // this.navCtrl.push(ProfilePage, {userCode: text});
+                        // Should be different page, flow changed
 
                         this.qrScanner.destroy();
                         this.qrScanner.hide();
