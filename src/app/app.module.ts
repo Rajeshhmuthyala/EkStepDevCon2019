@@ -9,11 +9,11 @@ import {TextToSpeech} from '@ionic-native/text-to-speech';
 import {MyApp} from './app.component';
 import {HomePage} from '../pages/home/home';
 import {RegistrationPage} from '../pages/registration/registration';
-import {StallFormPage} from '../pages/stallform/stallform.component';
+import {StallQRScanPage} from '../pages/stall-qr-scan/stall-qr-scan.component';
 import {DevConConfig} from '../config/DevConConfig';
 import {UserServiceMock} from '../services/user/user-service-mock';
 import {ProfilePage} from '../pages/profile/profile';
-import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
+import {QRScanner} from '@ionic-native/qr-scanner';
 import {AppPreferences} from '@ionic-native/app-preferences';
 import {AppPreferencesMock} from '../services/app-preferences/app-preferences-mock';
 import {TabsPage} from '../pages/tabs/tabs';
@@ -24,7 +24,7 @@ import {TextToSpeechService} from '../services/text-to-speech';
         MyApp,
         HomePage,
         RegistrationPage,
-        StallFormPage,
+        StallQRScanPage,
         ProfilePage,
         TabsPage
     ],
@@ -37,7 +37,7 @@ import {TextToSpeechService} from '../services/text-to-speech';
         MyApp,
         HomePage,
         RegistrationPage,
-        StallFormPage,
+        StallQRScanPage,
         ProfilePage,
         TabsPage
     ],

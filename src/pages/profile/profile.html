@@ -16,6 +16,10 @@
 <ion-content padding>
 
     <ion-item>
+        {{userCode}}
+    </ion-item>
+
+    <ion-item>
         <ion-label value="attendance">Attendance</ion-label>
         <ion-checkbox></ion-checkbox>
     </ion-item>
@@ -26,9 +30,3 @@
     </ion-item>
 
 </ion-content>
-
-<ion-footer>
-    <button ion-button block style="color: black; height: 60px; border-radius: 8px; font-size: 1.2em;"
-            (click)="Submit()">Submit
-    </button>
-</ion-footer>

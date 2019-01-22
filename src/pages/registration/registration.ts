@@ -6,8 +6,8 @@ import {AppConfig} from '../../config/AppConfig';
 import {UserService} from '../../services/user/user.service';
 import {CreateUserProfileResponse} from '../../services/user/response';
 import {PreferenceKey} from '../../config/constants';
-import {ProfilePage} from '../profile/profile';
 import {TabsPage} from '../tabs/tabs';
+import {StallQRScanPage} from '../stall-qr-scan/stall-qr-scan.component';
 
 @Component({
     selector: 'page-registration',
@@ -59,7 +59,7 @@ export class RegistrationPage {
             this.resetCountTimer = undefined;
             this.formCount = 0;
             alert('moving to form page!');
-            this.navCtrl.push(StallFormPage, {});
+            this.navCtrl.push(StallQRScanPage, {});
         }
         if (this.resetCountTimer) {
             clearTimeout(this.resetCountTimer);
