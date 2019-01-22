@@ -1,7 +1,11 @@
-import { UserAttendanceRequest } from "./user-attendance";
+import {AttendanceTelemetry, BuyIdeaTelemetry, FeedbackTelemetry, RegisterTelemetry} from './telemetry-requests';
 
 export interface TelemetryService {
+    generateRegisterTelemetry(request: RegisterTelemetry): Promise<undefined>;
 
-    markAttendance(userData: UserAttendanceRequest): Promise<string>;
+    generateAttendanceTelemetry(request: AttendanceTelemetry): Promise<undefined>;
 
+    generateBuyIdeaTelemetry(request: BuyIdeaTelemetry): Promise<undefined>;
+
+    generateFeedbackTelemetry(request: FeedbackTelemetry): Promise<undefined>;
 }

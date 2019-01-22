@@ -5,6 +5,7 @@ import {PreferenceKey} from '../../config/constants';
 import {GetUserPrfileRequest} from '../../services/user/requests';
 import {User} from '../../services/user/User';
 import {UserService} from '../../services/user/user.service';
+import {StallNamePage} from '../stall-name/stall-name';
 
 @Component({
   selector: 'page-home',
@@ -38,6 +39,10 @@ export class HomePage {
 
         this.name = user.userName;
         this.org = user.orgName;
+    }
+
+    stallNameCard(){
+        this.navCtrl.push(StallNamePage);
     }
 
 }
