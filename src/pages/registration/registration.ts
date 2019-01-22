@@ -5,7 +5,7 @@ import {AppPreferences} from '@ionic-native/app-preferences';
 import {AppConfig} from '../../config/AppConfig';
 import {UserService} from '../../services/user/user.service';
 import {CreateUserProfileResponse} from '../../services/user/response';
-import {PreferenceKey} from '../../app/app.constant';
+import {PreferenceKey} from '../../config/constants';
 import {HomePage} from '../home/home';
 import {ProfilePage} from '../profile/profile';
 
@@ -46,7 +46,7 @@ export class RegistrationPage {
         };
         this.userService.createUser(createUser)
         .then(async (createUserResponse: CreateUserProfileResponse) => {
-            await this.appPreference.store(PreferenceKey.CREATE_USER_RESPONSE, JSON.stringify(createUserResponse));
+            await this.appPreference.store(PreferenceKey.USER_CODE, createUserResponse.userCode);
         }).then(() => {
             const index = this.navCtrl.getActive().index;
             this.navCtrl.push(HomePage).then(() => {

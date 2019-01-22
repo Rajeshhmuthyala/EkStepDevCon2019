@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Platform} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {RegistrationPage} from '../pages/registration/registration';
-import {PreferenceKey} from './app.constant';
+import {PreferenceKey} from '../config/constants';
 import {AppPreferences} from '@ionic-native/app-preferences';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {TabsPage} from '../pages/tabs/tabs';
@@ -36,11 +36,7 @@ export class MyApp implements OnInit {
     }
 
     private async isAlreadyRegistered(): Promise<string | undefined> {
-        return this.appPreference.fetch(PreferenceKey.CREATE_USER_RESPONSE).then(val => {
-            if (val) {
-                return Promise.resolve(JSON.parse(val));
-            }
-        });
+        return this.appPreference.fetch(PreferenceKey.USER_CODE);
     }
 }
 

@@ -1,7 +1,7 @@
 import {Component, Inject, NgZone} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {AppPreferences} from '@ionic-native/app-preferences';
-import {PreferenceKey} from '../../app/app.constant';
+import {PreferenceKey} from '../../config/constants';
 import {GetUserPrfileRequest} from '../../services/user/requests';
 import {User} from '../../services/user/User';
 import {UserService} from '../../services/user/user.service';
@@ -27,7 +27,7 @@ export class HomePage {
     }
 
     private async fetchUserDetails() {
-        const createUserResponse: GetUserPrfileRequest = await this.appPreference.fetch(PreferenceKey.CREATE_USER_RESPONSE);
+        const createUserResponse: GetUserPrfileRequest = await this.appPreference.fetch(PreferenceKey.USER_CODE);
 
         const user: User = await this.userService.getUser(createUserResponse);
 
