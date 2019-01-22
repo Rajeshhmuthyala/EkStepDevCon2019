@@ -6,8 +6,8 @@ import {AppConfig} from '../../config/AppConfig';
 import {UserService} from '../../services/user/user.service';
 import {CreateUserProfileResponse} from '../../services/user/response';
 import {PreferenceKey} from '../../config/constants';
-import {HomePage} from '../home/home';
 import {ProfilePage} from '../profile/profile';
+import {TabsPage} from '../tabs/tabs';
 
 @Component({
     selector: 'page-registration',
@@ -48,10 +48,7 @@ export class RegistrationPage {
         .then(async (createUserResponse: CreateUserProfileResponse) => {
             await this.appPreference.store(PreferenceKey.USER_CODE, createUserResponse.userCode);
         }).then(() => {
-            const index = this.navCtrl.getActive().index;
-            this.navCtrl.push(HomePage).then(() => {
-                this.navCtrl.remove(index);
-            });
+            return this.navCtrl.setRoot(TabsPage);
         })
     }
 
