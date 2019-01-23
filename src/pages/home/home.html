@@ -1,5 +1,5 @@
-<ion-header>
-    <ion-navbar hideBackButton padding>
+<ion-content text-center>
+    <ion-navbar hideBackButton padding no-margin>
         <ion-buttons left>
             <button ion-button>
                 <h5 no-padding no-margin margin-right>Hi!</h5>
@@ -26,15 +26,6 @@
             </button>
         </ion-buttons>
     </ion-navbar>
-</ion-header>
-
-
-<ion-content text-center>
-    <ion-fab Bottom right>
-        <button ion-fab icon-only (click)="navigateToStallListPage()">
-            <ion-icon name="bulb"></ion-icon>
-        </button>
-    </ion-fab>
 
     <ion-grid>
         <ion-row>
@@ -84,4 +75,10 @@
 
         </div>
     </div>
+
+    <ion-fab Bottom right>
+        <button ion-fab icon-only (click)="navigateToStallListPage()">
+            <ion-icon name="bulb"></ion-icon>
+        </button>
+    </ion-fab>
 </ion-content>
