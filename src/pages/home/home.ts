@@ -12,10 +12,9 @@ import {StallNamePage} from '../stall-name/stall-name';
     templateUrl: 'home.html'
 })
 export class HomePage {
-    public activeSegment = 'first';
-
     name: string;
     org: string;
+    segmentType = "first";
 
     constructor(
         private navCtrl: NavController,
@@ -45,10 +44,6 @@ export class HomePage {
 
     stallNameCard() {
         this.navCtrl.push(StallNamePage);
-    }
-
-    public segmentChanged($event) {
-        console.log($event);
     }
 
 }
