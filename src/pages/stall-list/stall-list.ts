@@ -5,6 +5,7 @@ import {GetIdeasResponse} from '../../services/stall/responses';
 import {Idea} from '../../services/stall/Idea';
 import {Stall} from '../../services/stall/Stall';
 import {TelemetryService} from '../../services/telemetry/telemetry-services';
+import {LoadingController} from 'ionic-angular';
 
 @Component({
     selector: 'page-stall-list',
@@ -22,7 +23,8 @@ export class StallListPage {
 
     constructor(
         @Inject('STALL_SERVICE') private stallService: StallService,
-        @Inject('TELEMETRY_SERVICE') private telemetryService: TelemetryService) {
+        @Inject('TELEMETRY_SERVICE') private telemetryService: TelemetryService,
+        private loadingCtrl: LoadingController,) {
     }
 
     ionViewDidLoad() {
@@ -63,14 +65,29 @@ export class StallListPage {
     }
 
     public onStallSelect(stall: Stall) {
-        this.stallService.getIdeas({code: stall.code}).then((data) => {
-            this.currentStall = stall;
-            this.ideasResponse = data;
-        });
+        if(stall.code !== "STA1"){
+            const loader = this.getLoader();
+            loader.present();
+            this.stallService.getIdeas({code: stall.code}).then((data) => {
+                this.currentStall = stall;
+                this.ideasResponse = data;
+            });
+            loader.dismiss(); 
+        } else {
+            this.stallService.getIdeas({code: stall.code}).then((data) => {
+                this.currentStall = stall;
+                this.ideasResponse = data;
+            });
+
+        }
+     
     }
 
     private async fetchStalls() {
+        const loader = this.getLoader();
+        loader.present();
         this.stalls = await this.stallService.getStalls({Stall: {}});
+        loader.dismiss();
     }
 
     private async fetchBoughtIdeas() {
@@ -103,4 +120,10 @@ export class StallListPage {
             })
         });
     }
+    getLoader(): any {
+        return this.loadingCtrl.create({
+          duration: 30000,
+          spinner: 'crescent'
+        });
+      }
 }
