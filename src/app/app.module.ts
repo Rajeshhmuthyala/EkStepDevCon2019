@@ -1,4 +1,3 @@
-import { UserServiceMock } from './../services/user/user-service-mock';
 import { UserIdeasPage } from './../pages/user-ideas/user-ideas';
 import { AboutAppuPage } from './../pages/about-appu/about-appu';
 import {BrowserModule} from '@angular/platform-browser';
