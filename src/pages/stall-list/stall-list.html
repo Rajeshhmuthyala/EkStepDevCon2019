@@ -14,13 +14,9 @@
 
 
 <ion-content class=" cards-bg">
-  <ion-navbar>
-    <ion-select [(ngModel)]="store" interface="popover" [selectOptions]="storeOptions">
-      <ion-option value="store1" selected>Store 1</ion-option>
-      <ion-option value="store2">Store 2</ion-option>
-      <ion-option value="store3">Store 3</ion-option>
-      <ion-option value="store4">Store 4</ion-option>
-      <ion-option value="store5">Store 5</ion-option>
+  <ion-navbar hideBackButton="true">
+    <ion-select (ionChange)="onStallSelect($event)" interface="popover" [selectOptions]="storeOptions">
+      <ion-option *ngFor="let stall of stalls" [value]="stall.code" [selected] ="stall.name === 'Creation'">{{stall.name}}</ion-option>
     </ion-select>
     <ion-buttons end>
       <button ion-button color="danger" round>
@@ -31,16 +27,16 @@
 
 
 
-  <ion-card style="color: white; background: -webkit-linear-gradient(left, rgba(72,158,234,1) 5%, rgba(72,158,234,1) 18%, rgba(72,158,234,1) 20%, rgba(31,127,229,1) 92%, rgba(31,127,229,1) 93%);">
+  <ion-card *ngFor="let idea of ideasResponse?.Stall.ideas" style="color: white; background: -webkit-linear-gradient(left, rgba(72,158,234,1) 5%, rgba(72,158,234,1) 18%, rgba(72,158,234,1) 20%, rgba(31,127,229,1) 92%, rgba(31,127,229,1) 93%);">
     <ion-card-header class="card-header">
       <h1>
-        Idea Name
+        {{idea?.name}}
       </h1>
     </ion-card-header>
 
     <div class="p-16"><b>Description:</b>
       <p style="color: white">
-        The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.
+        {{idea?.description}}
     </div>
 
     <div class="p-16"><b>Advanced:</b>
