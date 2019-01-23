@@ -48,7 +48,7 @@ ion-col.col {
 }
 
 ion-row.toprow.row {
-    height: 200px;
+    height: 260px;
     p {
         width: 120px;
         margin-left: auto;
@@ -62,7 +62,7 @@ ion-row.toprow.row {
 }
 
 ion-row.midrow.row {
-    height: 200px;
+    height: 140px;
     p {
         width: 120px;
         margin-left: auto;
@@ -77,15 +77,16 @@ ion-row.midrow.row {
 
 ion-col.fouthcards.col {
     border: 1px solid;
-    height: 50px;
+    height: 70px;
     background-color: aliceblue;
 }
 
 b, strong {
     // font-weight: bold;
-    margin-left: 40px;
-    height: 100%;
-    vertical-align: middle;
-    line-height: 2.6;
+    // margin-left: 40px;
+    // height: 100%;
+    // vertical-align: middle;
+    // line-height: 2.6;
+    margin: 0%;
     }
 }
