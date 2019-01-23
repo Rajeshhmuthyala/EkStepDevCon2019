@@ -1,30 +1,20 @@
-
-export interface CreateUserRpofileRequest {
-    id: string;
-    request: {
-        Visitor: {
-            name: string
-            org: string
-            nCoinsGiven: number
-        }
+export interface CreateUserRequest {
+    Visitor: {
+        name: string
+        org: string
+        // nCoinsGiven: number
     }
 }
 
-export interface GetUserPrfileRequest {
-    id: string;
-    request: {
+export interface GetUserRequest {
+    code: string;
+}
+
+export interface UpdateUserRequest {
+    Visitor: {
         code: string;
-    }
-}
-
-export  interface UpdateUserProfileRequest {
-    id: string;
-    request: {
-        Visitor: {
-            code: string;
-            name: string
-            org: string
-            nCoinsGiven: number
-        }
+        name: string;
+        org: string
+        // nCoinsGiven: string;
     }
 }

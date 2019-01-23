@@ -1,15 +1,10 @@
-import {
-    CreateUserRpofileRequest,
-    GetUserPrfileRequest,
-    UpdateUserProfileRequest
-} from './requests';
-import {CreateUserProfileResponse} from './response';
-import {User} from './User';
+import {CreateUserRequest, GetUserRequest, UpdateUserRequest} from './requests';
+import {CreateUserResponse, GetUserResponse, UpdateUserResponse} from './response';
 
 export interface UserService {
-    createUser(createUserProfile: CreateUserRpofileRequest): Promise<CreateUserProfileResponse>;
+    createUser(createUserRequest: CreateUserRequest): Promise<CreateUserResponse>;
 
-    getUser(userCode: GetUserPrfileRequest): Promise<User>;
+    getUser(getUserRequest: GetUserRequest): Promise<GetUserResponse>;
 
-    updateUserProfile(updateUserProfile: UpdateUserProfileRequest): Promise<string>;
+    updateUserProfile(updatedUserRequest: UpdateUserRequest): Promise<UpdateUserResponse>;
 }
