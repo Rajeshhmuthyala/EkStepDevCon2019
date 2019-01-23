@@ -1,56 +1,79 @@
-import { Component, Inject } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component, Inject} from '@angular/core';
 import {StallService} from '../../services/stall/stall-service';
-import {AppPreferences} from '@ionic-native/app-preferences';
-import {PreferenceKey} from '../../config/constants';
+import {BoughtIdeas} from '../../services/stall/BoughtIdeas';
 import {GetIdeasResponse} from '../../services/stall/responses';
+import {Idea} from '../../services/stall/Idea';
 import {Stall} from '../../services/stall/Stall';
-import { timestamp } from 'rxjs/operators';
-/**
- * Generated class for the StallNamePage pa
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import {TelemetryService} from '../../services/telemetry/telemetry-services';
 
-@IonicPage()
 @Component({
-  selector: 'page-stall-list',
-  templateUrl: 'stall-list.html',
+    selector: 'page-stall-list',
+    templateUrl: 'stall-list.html',
 })
 export class StallListPage {
-  stalls = [];
-  ideasResponse: any;
+    stalls = [];
+    ideasResponse?: GetIdeasResponse;
+    storeOptions = {
+        title: 'Select Store',
+        cssClass: 'select-box'
+    };
+    private currentStall: Stall;
+    private boughtIdeas: BoughtIdeas = {};
 
-  storeOptions = {
-    title: 'Select Store',
-    cssClass: 'select-box'
-  };
+    constructor(
+        @Inject('STALL_SERVICE') private stallService: StallService,
+        @Inject('TELEMETRY_SERVICE') private telemetryService: TelemetryService) {
+    }
 
-  constructor(public navCtrl: NavController,
-     public navParams: NavParams,
-      @Inject('STALL_SERVICE') private stallService: StallService) {
-        this.onStallSelect('STA1');
-  }
+    ionViewDidLoad() {
+        this.fetchStalls().then(() => {
+            this.onStallSelect(this.stalls[0]);
+        });
+        this.fetchBoughtIdeas();
+    }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad StallListPage');
-    this.fetchStallDetails();
-  }
-  private async fetchStallDetails() {
-    this.stalls = await this.stallService.getStalls({ Stall: {} });
-    console.log(this.stalls);
-  }
+    public isIdeaBought(ideaCode: string): boolean {
+        const key = `${this.currentStall.code}-${ideaCode}`;
 
-  public onStallSelect(stallCode: string) {
-    console.log('hi', stallCode);
-    this.stallService.getIdeas({code: stallCode}).then((data) => {
-      this.ideasResponse = data;
-    });
+        return this.boughtIdeas[key] && this.boughtIdeas[key].purchased;
+    }
 
-  }
+    public onBuyIdea(idea: Idea) {
+        this.stallService.buyIdea({
+            stallCode: this.currentStall.code,
+            ideaCode: idea.code,
+            details: {
+                stallName: this.currentStall.name,
+                ideaName: idea.name,
+                desc: idea.description
+            }
+        }).then(async () => {
+            await this.telemetryService.generateBuyIdeaTelemetry({
+                dimensions: {
+                    stallId: this.currentStall.code,
+                    stallName: this.currentStall.name,
+                    ideaId: idea.code,
+                    ideaName: idea.name,
+                },
+                edata: {}
+            })
+        }).then(() => {
+            this.fetchBoughtIdeas();
+        });
+    }
 
-  public onModelChange(event) {
-    console.log(event);
-  }
+    public onStallSelect(stall: Stall) {
+        this.stallService.getIdeas({code: stall.code}).then((data) => {
+            this.currentStall = stall;
+            this.ideasResponse = data;
+        });
+    }
+
+    private async fetchStalls() {
+        this.stalls = await this.stallService.getStalls({Stall: {}});
+    }
+
+    private async fetchBoughtIdeas() {
+        this.boughtIdeas = await this.stallService.getBoughtIdeas();
+    }
 }

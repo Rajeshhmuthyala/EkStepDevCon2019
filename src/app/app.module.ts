@@ -106,6 +106,11 @@ import {StallServicesImpl} from '../services/stall/stall-services-impl';
 })
 export class AppModule {
     constructor() {
+        this.addUserBoughtIdeasStore();
+    }
+
+    private addUserBoughtIdeasStore() {
+        localStorage.getItem(PreferenceKey.USER_BOUGHT_IDEAS) ||
         localStorage.setItem(PreferenceKey.USER_BOUGHT_IDEAS, JSON.stringify({}));
     }
 }
