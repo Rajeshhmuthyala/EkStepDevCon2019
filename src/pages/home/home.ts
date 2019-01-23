@@ -36,7 +36,8 @@ export class HomePage {
     }
 
     navigateToStallListPage() {
-        this.app.getRootNav().setRoot(StallListPage);
+        // this.app.getRootNav().setRoot(StallListPage);
+        this.navCtrl.push(StallListPage);
     }
 
     private async fetchUserDetails() {
