@@ -6,6 +6,7 @@ import {UserService} from '../../services/user/user.service';
 import {StallListPage} from '../stall-list/stall-list';
 import {GetUserResponse} from '../../services/user/response';
 import {StallService} from '../../services/stall/stall-service';
+import {LoadingController} from 'ionic-angular';
 
 declare const cordova;
 
@@ -25,14 +26,18 @@ export class HomePage {
         private zone: NgZone,
         private app: App,
         private platform: Platform,
+        private loadingCtrl: LoadingController,
         @Inject('USER_SERVICE') private userService: UserService,
         @Inject('STALL_SERVICE') private stallService: StallService
     ) {
     }
 
     ionViewDidEnter() {
+      
         this.qrCodeWidth = this.platform.width() - (this.platform.width() * 0.4);
+       
         this.fetchUserDetails();
+      
     }
 
     navigateToStallListPage() {
@@ -40,8 +45,20 @@ export class HomePage {
     }
 
     private async fetchUserDetails() {
+        const loader = await this.getLoader();
+        await loader.present();
         const userCode: string = await this.appPreference.fetch(PreferenceKey.USER_CODE);
-
+        
         this.userResponse = await this.userService.getUser({code: userCode});
+         
+        await loader.dismiss();  
+     
     }
+
+    getLoader(): any {
+        return this.loadingCtrl.create({
+          duration: 30000,
+          spinner: 'crescent'
+        });
+      }
 }
