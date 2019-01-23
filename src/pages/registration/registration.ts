@@ -47,6 +47,7 @@ export class RegistrationPage {
         this.userService.createUser(createUser)
             .then(async (createUserResponse: CreateUserResponse) => {
                 await this.appPreference.store(PreferenceKey.USER_CODE, createUserResponse.Visitor.code);
+                await this.appPreference.store(PreferenceKey.USER_NAME, createUser.Visitor.name);
         }).then(() => {
             return this.navCtrl.setRoot(TabsPage);
         }).then(() => {

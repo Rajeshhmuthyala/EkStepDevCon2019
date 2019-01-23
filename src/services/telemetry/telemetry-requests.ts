@@ -1,7 +1,5 @@
 export interface RegisterTelemetry {
     dimensions: {
-        visitorId: string;
-        visitorName: string;
     };
     edata: {
         mode: "online" | "offline";
@@ -10,8 +8,6 @@ export interface RegisterTelemetry {
 
 export interface AttendanceTelemetry {
     dimensions: {
-        visitorId: string;
-        visitorName: string;
         stallId: string;
         stallName: string;
     };

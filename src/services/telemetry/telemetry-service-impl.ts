@@ -5,6 +5,8 @@ import {AttendanceTelemetry, BuyIdeaTelemetry, FeedbackTelemetry, RegisterTeleme
 import {AppConfig} from '../../config/AppConfig';
 import {Telemetry, Telemetry_IDs} from './base-telemetry';
 import {TelemetryApiHandlerService} from '../api/telemetry-api-handler-service';
+import {AppPreferences} from '@ionic-native/app-preferences';
+import {PreferenceKey} from '../../config/constants';
 
 @Injectable()
 export class TelemetryServiceImpl implements TelemetryService {
@@ -13,6 +15,7 @@ export class TelemetryServiceImpl implements TelemetryService {
 
     constructor(private apiHandler: TelemetryApiHandlerService,
                 private device: Device,
+                private appPreferences: AppPreferences,
                 @Inject('APP_CONFIG') private config: AppConfig) {
     }
 
@@ -25,7 +28,11 @@ export class TelemetryServiceImpl implements TelemetryService {
                         ...this.constructBaseTelemetry(),
                         eid: Telemetry_IDs.DC_START,
                         edata: request.edata,
-                        dimensions: request.dimensions
+                        dimensions: {
+                            ...request.dimensions,
+                            visitorId: await this.appPreferences.fetch(PreferenceKey.USER_CODE),
+                            visitorName: await this.appPreferences.fetch(PreferenceKey.USER_NAME)
+                        }
                     } as Telemetry
                 ]
             }
@@ -43,7 +50,11 @@ export class TelemetryServiceImpl implements TelemetryService {
                         ...this.constructBaseTelemetry(),
                         eid: Telemetry_IDs.DC_BUY,
                         edata: request.edata,
-                        dimensions: request.dimensions
+                        dimensions: {
+                            ...request.dimensions,
+                            visitorId: await this.appPreferences.fetch(PreferenceKey.USER_CODE),
+                            visitorName: await this.appPreferences.fetch(PreferenceKey.USER_NAME)
+                        }
                     } as Telemetry
                 ]
             }
@@ -61,7 +72,11 @@ export class TelemetryServiceImpl implements TelemetryService {
                         ...this.constructBaseTelemetry(),
                         eid: Telemetry_IDs.DC_FEEDBCK,
                         edata: request.edata,
-                        dimensions: request.dimensions
+                        dimensions: {
+                            ...request.dimensions,
+                            visitorId: await this.appPreferences.fetch(PreferenceKey.USER_CODE),
+                            visitorName: await this.appPreferences.fetch(PreferenceKey.USER_NAME)
+                        }
                     } as Telemetry
                 ]
             }
@@ -79,7 +94,11 @@ export class TelemetryServiceImpl implements TelemetryService {
                         ...this.constructBaseTelemetry(),
                         eid: Telemetry_IDs.DC_REGISTER,
                         edata: request.edata,
-                        dimensions: request.dimensions
+                        dimensions: {
+                            ...request.dimensions,
+                            visitorId: await this.appPreferences.fetch(PreferenceKey.USER_CODE),
+                            visitorName: await this.appPreferences.fetch(PreferenceKey.USER_NAME)
+                        }
                     } as Telemetry
                 ]
             }
