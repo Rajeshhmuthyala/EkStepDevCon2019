@@ -4,17 +4,20 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content class="container">
-    <form [formGroup]="guestRegistrationForm" class="form">
-        <ion-card class="form-field">
+<ion-content class="container" style="background-color:#08a5fb" padding>
+    <!-- <form [formGroup]="guestRegistrationForm" class="form">
+         <ion-card class="form-field">
             <ion-item class="name-field">
                 <ion-label stacked text-uppercase>Name<span ion-text color="danger">&nbsp;*</span></ion-label>
                 <ion-input formControlName="name" placeholder="Ex: Joel Johnson"></ion-input>
             </ion-item>
         </ion-card>
+        <div class="custom-input">
+            <input type="text" placeholder="Name">
+        </div>
         <ion-card class="form-field">
             <ion-item>
-                <ion-label stacked text-uppercase>Organisation</ion-label>
+                <ion-label text-uppercase>Organisation</ion-label>
                 <ion-select multiple="false" text-capitalize formControlName="org">
                     <ion-option *ngFor="let org of orgList" value="{{org}}">{{org}}</ion-option>
                 </ion-select>
@@ -26,10 +29,34 @@
         <button ion-button full (tap)='onClickToNavigateToStallForm()'>
             Hidden Stall Panel
         </button>
-    </ion-item>
+    </ion-item> -->
+    <form [formGroup]="guestRegistrationForm" class="form">
+        <div text-center class="image-section">
+            <img width="80" height="80" src="assets/imgs/smiley.svg" />
+        </div>
+        <div class="text-section">
+            <ion-label text-center style="font-size:25px; color:yellow"><b>Welcome to Devcon !!!</b></ion-label>
+            <ion-label></ion-label>
+            <ion-label text-center style="color:#ffffff; margin-top:-19px; margin-bottom:50px;">Please enter your
+                details
+                to get started</ion-label>
+        </div>
+        <ion-item class="custom-input" no-lines style="margin-bottom:4vh">
+            <ion-input type="text" class="placeholder-text" formControlName="name" placeholder="User Name"></ion-input>
+        </ion-item>
+        <ion-item no-lines class="custom-select">
+            <ion-label style="color:#ffffff">Organization</ion-label>
+            <ion-select multiple="false" text-capitalize formControlName="org">
+                <ion-option *ngFor="let org of orgList" value="{{org}}">{{org}}</ion-option>
+            </ion-select>
+        </ion-item>
+
+        <button ion-button color="light" style="border-radius: 4px; margin-top:10vh; margin-left:43%" [disabled]="!guestRegistrationForm.valid"
+            (click)="register()">Submit</button>
+    </form>
 </ion-content>
 
-<ion-footer>
+<!-- <ion-footer>
     <button ion-button block [disabled]="!guestRegistrationForm.valid" (click)="register()">Register
     </button>
-</ion-footer>
+</ion-footer> -->

@@ -41,7 +41,7 @@ $colors: (
   light:      #f4f4f4,
   dark:       #222
 );
-
+$text-input-placeholder-color: map-get($colors, light);
 
 // App iOS Variables
 // --------------------------------------------------
