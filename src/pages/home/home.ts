@@ -8,20 +8,22 @@ import {UserService} from '../../services/user/user.service';
 import {StallNamePage} from '../stall-name/stall-name';
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+    selector: 'page-home',
+    templateUrl: 'home.html'
 })
 export class HomePage {
-  name: string;
-  org : string;
-  segmentType = "first";
-  constructor(
-      private navCtrl: NavController,
-      private appPreference: AppPreferences,
-      private zone: NgZone,
-      @Inject('USER_SERVICE') private userService: UserService
-  ) {
-  }
+    public activeSegment = 'first';
+
+    name: string;
+    org: string;
+
+    constructor(
+        private navCtrl: NavController,
+        private appPreference: AppPreferences,
+        private zone: NgZone,
+        @Inject('USER_SERVICE') private userService: UserService
+    ) {
+    }
 
     ionViewDidEnter() {
         this.fetchUserDetails();
@@ -41,8 +43,12 @@ export class HomePage {
         this.org = user.orgName;
     }
 
-    stallNameCard(){
+    stallNameCard() {
         this.navCtrl.push(StallNamePage);
+    }
+
+    public segmentChanged($event) {
+        console.log($event);
     }
 
 }
