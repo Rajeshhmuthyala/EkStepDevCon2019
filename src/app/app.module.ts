@@ -18,17 +18,18 @@ import {TabsPage} from '../pages/tabs/tabs';
 import {TextToSpeechService} from '../services/text-to-speech';
 import {Floor1Component} from '../components/floor-plans/floor-1/floor-1.component';
 import {Floor2Component} from '../components/floor-plans/floor-2/floor-2.component';
-import {TelemetryServiceMock} from '../services/telemetry/telemetry-service-mock';
 import {Ionic2RatingModule} from 'ionic2-rating';
 import {StallListPage} from '../pages/stall-list/stall-list';
 import {CustomSplashComponent} from '../pages/custom-splash/custom-splash.component';
 import {LottieAnimationViewModule} from 'ng-lottie';
-import { Floor3Component } from '../components/floor-plans/floor-3/floor-3.component';
-import { Floor4Component } from '../components/floor-plans/floor-4/floor-4.component';
+import {Floor3Component} from '../components/floor-plans/floor-3/floor-3.component';
+import {Floor4Component} from '../components/floor-plans/floor-4/floor-4.component';
 import {HTTP} from '@ionic-native/http';
 import {StallServiceMock} from '../services/stall/stall-service-mock';
 import {UserServiceImpl} from '../services/user/user-service-impl';
 import {ApiHandlerService} from '../services/api/api-handler-service';
+import {TelemetryServiceImpl} from '../services/telemetry/telemetry-service-impl';
+import {TelemetryApiHandlerService} from '../services/api/telemetry-api-handler-service';
 
 
 @NgModule({
@@ -72,9 +73,10 @@ import {ApiHandlerService} from '../services/api/api-handler-service';
         TextToSpeechService,
         HTTP,
         ApiHandlerService,
+        TelemetryApiHandlerService,
         {
             provide: 'TELEMETRY_SERVICE',
-            useClass: TelemetryServiceMock
+            useClass: TelemetryServiceImpl
         }, {
             provide: AppPreferences,
             useClass: AppPreferencesMock

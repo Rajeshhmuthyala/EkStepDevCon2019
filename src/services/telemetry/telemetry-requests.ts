@@ -1,30 +1,45 @@
-interface BaseTelemetryRequest {
-    eid: string;
-    visitorId: string;
-    visitorName: string;
+export interface RegisterTelemetry {
+    dimensions: {
+        visitorId: string;
+        visitorName: string;
+    };
+    edata: {
+        mode: "online" | "offline";
+    };
 }
 
-export interface RegisterTelemetry extends BaseTelemetryRequest {
-    edata: any;
+export interface AttendanceTelemetry {
+    dimensions: {
+        visitorId: string;
+        visitorName: string;
+        stallId: string;
+        stallName: string;
+    };
+    edata: {
+        type: "app";
+        mode: "visit";
+    };
 }
 
-export interface AttendanceTelemetry extends BaseTelemetryRequest {
-    stallId: string;
-    stallName: string;
+export interface BuyIdeaTelemetry {
+    dimensions: {
+        stallId: string;
+        stallName: string;
+        ideaId: string;
+        ideaName: string;
+    };
+    edata: {}
 }
 
-export interface BuyIdeaTelemetry extends BaseTelemetryRequest {
-    stallId: string;
-    stallName: string;
-    ideaId: string;
-    ideaName: string;
-    edata: any;
-}
-
-export interface FeedbackTelemetry extends BaseTelemetryRequest {
-    stallId: string;
-    stallName: string;
-    ideaId: string;
-    ideaName: string;
-    edata: any;
+export interface FeedbackTelemetry {
+    dimensions: {
+        stallId: string;
+        stallName: string;
+        ideaId: string;
+        ideaName: string;
+    };
+    edata: {
+        rating: number,
+        comment: string
+    };
 }

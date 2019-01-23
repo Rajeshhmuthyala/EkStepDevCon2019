@@ -4,12 +4,11 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AppPreferences} from '@ionic-native/app-preferences';
 import {AppConfig} from '../../config/AppConfig';
 import {UserService} from '../../services/user/user.service';
-import {CreateUserResponse} from '../../services/user/response';
+import {CreateUserResponse, GetUserResponse} from '../../services/user/response';
 import {PreferenceKey} from '../../config/constants';
 import {TabsPage} from '../tabs/tabs';
 import {StallQRScanPage} from '../stall-qr-scan/stall-qr-scan.component';
 import {TelemetryService} from '../../services/telemetry/telemetry-services';
-import {Telemetry_IDs} from '../../services/telemetry/base-telemetry';
 import {ProfilePage} from '../profile/profile';
 
 @Component({
@@ -50,12 +49,18 @@ export class RegistrationPage {
                 await this.appPreference.store(PreferenceKey.USER_CODE, createUserResponse.Visitor.code);
         }).then(() => {
             return this.navCtrl.setRoot(TabsPage);
-        }).then(async () => {
+        }).then(() => {
+            return this.appPreference.fetch(PreferenceKey.USER_CODE)
+                .then((userCode: string) => this.userService.getUser({code: userCode}))
+        }).then(async (userResponse: GetUserResponse) => {
             return this.telemetryService.generateRegisterTelemetry({
-                eid: Telemetry_IDs.DC_REGISTER,
-                visitorId: await this.appPreference.fetch(PreferenceKey.USER_CODE),
-                visitorName: '',
-                edata: {}
+                dimensions: {
+                    visitorId: userResponse.Visitor.code,
+                    visitorName: userResponse.Visitor.name
+                },
+                edata: {
+                    mode: 'online'
+                }
             });
         }).catch((e) => {
             console.error(e);
