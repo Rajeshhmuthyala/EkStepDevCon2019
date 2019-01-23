@@ -37,9 +37,15 @@
         <div class="text-section">
             <ion-label text-center style="font-size:25px; color:yellow"><b>Welcome to Devcon !!!</b></ion-label>
             <ion-label></ion-label>
-            <ion-label text-center style="color:#ffffff; margin-top:-19px; margin-bottom:50px;">Please enter your
+            <ion-label text-center style="color:#ffffff; margin-top:-19px; margin-bottom:20px;">Please enter your
                 details
                 to get started</ion-label>
+        </div>
+        <div text-center class="camera-icon" (click)="takePicture()" *ngIf="lastImage === null">
+            <ion-icon name="camera"></ion-icon>
+        </div>
+        <div text-center class="camera-icon" *ngIf="lastImage !== null">
+            <img src="{{lastImage}}" (click)="takePicture(true)" style="width: 120px;height: 120px;border-radius: 50%;">
         </div>
         <ion-item class="custom-input" no-lines style="margin-bottom:4vh">
             <ion-input type="text" class="placeholder-text" formControlName="name" placeholder="User Name"></ion-input>

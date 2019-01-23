@@ -37,6 +37,11 @@ import {QRCodeModule} from 'angularx-qrcode';
 import {PreferenceKey} from '../config/constants';
 import {StallServicesImpl} from '../services/stall/stall-services-impl';
 
+// Face API related imports *************
+import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
+import { Camera } from '@ionic-native/camera';
+import { Transfer } from '@ionic-native/transfer';
+
 
 @NgModule({
     declarations: [
@@ -88,6 +93,9 @@ import {StallServicesImpl} from '../services/stall/stall-services-impl';
         HTTP,
         ApiHandlerService,
         TelemetryApiHandlerService,
+        Base64ToGallery,
+        Camera,
+        Transfer,
         {
             provide: 'TELEMETRY_SERVICE',
             useClass: TelemetryServiceImpl
