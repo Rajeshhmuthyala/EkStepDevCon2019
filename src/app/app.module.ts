@@ -29,7 +29,7 @@ import {Floor3Component} from '../components/floor-plans/floor-3/floor-3.compone
 import {Floor4Component} from '../components/floor-plans/floor-4/floor-4.component';
 import {HTTP} from '@ionic-native/http';
 import {StallServiceMock} from '../services/stall/stall-service-mock';
-import {UserServiceImpl} from '../services/user/user-service-impl';
+import {UserServiceMock} from '../services/user/user-service-mock';
 import {ApiHandlerService} from '../services/api/api-handler-service';
 import {TelemetryServiceImpl} from '../services/telemetry/telemetry-service-impl';
 import {TelemetryApiHandlerService} from '../services/api/telemetry-api-handler-service';
