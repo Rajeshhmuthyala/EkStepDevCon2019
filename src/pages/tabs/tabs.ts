@@ -1,3 +1,5 @@
+import { UserIdeasPage } from './../user-ideas/user-ideas';
+import { AboutAppuPage } from './../about-appu/about-appu';
 import {Component} from '@angular/core';
 import {HomePage} from '../home/home';
 
@@ -8,7 +10,8 @@ import {HomePage} from '../home/home';
 export class TabsPage {
 
     public homePage = HomePage;
-
+    public aboutAppuPage = AboutAppuPage;
+    public userIdeaPage  = UserIdeasPage; 
     constructor() {
     }
 
