@@ -1,24 +1,28 @@
-import {Component, Inject, NgZone} from '@angular/core';
-import {NavController,
+import { Component, Inject, NgZone } from '@angular/core';
+import { 
+    NavController,
     PopoverController,
     Platform,
     ToastController,
-    LoadingController} from 'ionic-angular';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AppPreferences} from '@ionic-native/app-preferences';
-import {AppConfig} from '../../config/AppConfig';
-import {UserService} from '../../services/user/user.service';
-import {CreateUserResponse, GetUserResponse} from '../../services/user/response';
-import {PreferenceKey} from '../../config/constants';
-import {TabsPage} from '../tabs/tabs';
-import {StallQRScanPage} from '../stall-qr-scan/stall-qr-scan.component';
-import {TelemetryService} from '../../services/telemetry/telemetry-services';
-import {ProfilePage} from '../profile/profile';
-import { StallSelectionPage } from '../stall-selection/stall-selection';
+    LoadingController // Face API *****
+} from 'ionic-angular'; // Face API imports Platform, ToastController
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AppPreferences } from '@ionic-native/app-preferences';
+import { AppConfig } from '../../config/AppConfig';
+import { UserService } from '../../services/user/user.service';
+import { CreateUserResponse, GetUserResponse } from '../../services/user/response';
+import { PreferenceKey } from '../../config/constants';
+import { TabsPage } from '../tabs/tabs';
+import { StallQRScanPage } from '../stall-qr-scan/stall-qr-scan.component';
+import { TelemetryService } from '../../services/telemetry/telemetry-services';
+import { ProfilePage } from '../profile/profile';
+
+// Face API related imports *************
 import { Camera, DestinationType, EncodingType, Direction } from '@ionic-native/camera';
 import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
 import { Transfer, TransferObject } from '@ionic-native/transfer';
 import { HTTP } from '@ionic-native/http';
+import { StallSelectionPage } from '../stall-selection/stall-selection';
 
 @Component({
     selector: 'page-registration',
