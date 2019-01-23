@@ -8,12 +8,10 @@ export class ErrorHandler {
             throw new Error('Could not parse Response');
         }
 
-        try {
-            if (res.data.params.status === 'SUCCESSFUL') {
-                return res.data.result;
-            }
-        } catch (e) {
-            throw new Error('Unexpected Response: ' + JSON.stringify(e));
+        if (res.data.params.status === 'SUCCESSFUL') {
+            return res.data.result;
+        } else {
+            throw new Error('Network Error: ' + JSON.stringify(res));
         }
     }
 }

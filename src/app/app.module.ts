@@ -26,6 +26,7 @@ import {CustomSplashComponent} from '../pages/custom-splash/custom-splash.compon
 import {LottieAnimationViewModule} from 'ng-lottie';
 import {HTTP} from '@ionic-native/http';
 import {UserServiceMock} from '../services/user/user-service-mock';
+import {StallServiceMock} from '../services/stall/stall-service-mock';
 
 
 @NgModule({
@@ -73,6 +74,9 @@ import {UserServiceMock} from '../services/user/user-service-mock';
         }, {
             provide: AppPreferences,
             useClass: AppPreferencesMock
+        }, {
+            provide: 'STALL_SERVICE',
+            useClass: StallServiceMock
         }, {
             provide: 'USER_SERVICE',
             useClass: UserServiceMock

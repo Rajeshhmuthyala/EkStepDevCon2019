@@ -19,29 +19,22 @@ export class UserServiceImpl implements UserService {
     createUser(createUserRequest: CreateUserRequest): Promise<CreateUserResponse> {
         return this.http.post(this.appConfig.baseUrl + UserServiceImpl.CREATE_USER_ENDPOINT, {
             id: "open-saber.registry.create",
-            ver: "1.0",
-            ets: "11234",
-            params: {
-                "did": "",
-                "key": "",
-                "msgid": ""
-            },
             request: createUserRequest
-        }, {}).then((res: HTTPResponse) => ErrorHandler.parseApiResponse(res));
+        }, {}).then(async (res: HTTPResponse) => ErrorHandler.parseApiResponse(res));
     }
 
     getUser(getUserRequest: GetUserRequest): Promise<GetUserResponse> {
         return this.http.post(this.appConfig.baseUrl + UserServiceImpl.GET_USER_ENDPOINT, {
             id: "open-saber.registry.read",
             request: getUserRequest
-        }, {}).then((res: HTTPResponse) => ErrorHandler.parseApiResponse(res));
+        }, {}).then(async (res: HTTPResponse) => ErrorHandler.parseApiResponse(res));
     }
 
     updateUserProfile(updatedUserRequest: UpdateUserRequest): Promise<UpdateUserResponse> {
         return this.http.post(this.appConfig.baseUrl + UserServiceImpl.UPDATE_USER_ENDPOINT, {
             id: "open-saber.registry.update",
             request: updatedUserRequest
-        }, {}).then((res: HTTPResponse) => ErrorHandler.parseApiResponse(res));
+        }, {}).then(async (res: HTTPResponse) => ErrorHandler.parseApiResponse(res));
     }
 
 }
