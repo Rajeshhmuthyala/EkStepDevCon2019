@@ -45,37 +45,29 @@
     <ion-toolbar no-border-top>
         <ion-segment no-padding [(ngModel)]="segmentType">
             <ion-segment-button value="first">
-                1st
+                1st Floor
             </ion-segment-button>
             <ion-segment-button value="second">
-
-                2nd
+                2nd Floor
             </ion-segment-button>
             <ion-segment-button value="third">
-                3rd
+                3rd Floor
             </ion-segment-button>
             <ion-segment-button value="fourth">
-                4th
+                4th Floor
             </ion-segment-button>
         </ion-segment>
     </ion-toolbar>
 
     <div class="box">
-
         <div [ngSwitch]="segmentType">
 
             <ion-list padding *ngSwitchCase="'first'">
-                <ion-card no-margin margin-bottom margin-top padding class="w-100">
-                    <floor-1-plan></floor-1-plan>
-                </ion-card>
-
+                <floor-1-plan></floor-1-plan>
             </ion-list>
 
             <ion-list padding *ngSwitchCase="'second'">
-
-                <ion-card no-margin margin-bottom margin-top padding class="w-100">
-                    <floor-2-plan></floor-2-plan>
-                </ion-card>
+                <floor-2-plan></floor-2-plan>
             </ion-list>
 
             <ion-list padding *ngSwitchCase="'third'">
@@ -83,7 +75,7 @@
             </ion-list>
 
             <ion-list padding *ngSwitchCase="'fourth'">
-                <floor-4-plan></floor-4-plan>
+                <floor-3-plan></floor-3-plan>
             </ion-list>
 
         </div>

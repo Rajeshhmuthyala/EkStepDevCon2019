@@ -1,17 +1,16 @@
 import {Component, Inject} from '@angular/core';
-import {NavController} from 'ionic-angular';
+import {NavController, PopoverController} from 'ionic-angular';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AppPreferences} from '@ionic-native/app-preferences';
 import {AppConfig} from '../../config/AppConfig';
 import {UserService} from '../../services/user/user.service';
-import {CreateUserProfileResponse} from '../../services/user/response';
+import {CreateUserResponse} from '../../services/user/response';
 import {PreferenceKey} from '../../config/constants';
 import {TabsPage} from '../tabs/tabs';
 import {StallQRScanPage} from '../stall-qr-scan/stall-qr-scan.component';
 import {TelemetryService} from '../../services/telemetry/telemetry-services';
 import {Telemetry_IDs} from '../../services/telemetry/base-telemetry';
-import { PopoverController } from 'ionic-angular';
-import { ProfilePage } from '../profile/profile';
+import {ProfilePage} from '../profile/profile';
 
 @Component({
     selector: 'page-registration',
@@ -41,18 +40,14 @@ export class RegistrationPage {
 
     public async register() {
         const createUser = {
-            id: "open-saber.registry.create",
-            request: {
-                 Visitor: {
-                     name: this.guestRegistrationForm.get('name').value,
-                     org: this.guestRegistrationForm.get('org').value,
-                     nCoinsGiven: 100
-                 }
+            Visitor: {
+                name: this.guestRegistrationForm.get('name').value,
+                org: this.guestRegistrationForm.get('org').value,
              }
         };
         this.userService.createUser(createUser)
-        .then(async (createUserResponse: CreateUserProfileResponse) => {
-            await this.appPreference.store(PreferenceKey.USER_CODE, createUserResponse.userCode);
+            .then(async (createUserResponse: CreateUserResponse) => {
+                await this.appPreference.store(PreferenceKey.USER_CODE, createUserResponse.Visitor.code);
         }).then(() => {
             return this.navCtrl.setRoot(TabsPage);
         }).then(async () => {
@@ -62,6 +57,8 @@ export class RegistrationPage {
                 visitorName: '',
                 edata: {}
             });
+        }).catch((e) => {
+            console.error(e);
         })
     }
 

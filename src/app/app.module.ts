@@ -10,7 +10,6 @@ import {TextToSpeech} from '@ionic-native/text-to-speech';
 import {RegistrationPage} from '../pages/registration/registration';
 import {StallQRScanPage} from '../pages/stall-qr-scan/stall-qr-scan.component';
 import {DevConConfig} from '../config/DevConConfig';
-import {UserServiceMock} from '../services/user/user-service-mock';
 import {ProfilePage} from '../pages/profile/profile';
 import {QRScanner} from '@ionic-native/qr-scanner';
 import {AppPreferences} from '@ionic-native/app-preferences';
@@ -18,14 +17,17 @@ import {AppPreferencesMock} from '../services/app-preferences/app-preferences-mo
 import {TabsPage} from '../pages/tabs/tabs';
 import {TextToSpeechService} from '../services/text-to-speech';
 import {Floor1Component} from '../components/floor-plans/floor-1/floor-1.component';
-import { Floor2Component } from '../components/floor-plans/floor-2/floor-2.component';
+import {Floor2Component} from '../components/floor-plans/floor-2/floor-2.component';
 import {TelemetryServiceMock} from '../services/telemetry/telemetry-service-mock';
-import { Ionic2RatingModule } from 'ionic2-rating';
-import {StallNamePage} from '../pages/stall-name/stall-name';
+import {Ionic2RatingModule} from 'ionic2-rating';
+import {StallListPage} from '../pages/stall-list/stall-list';
 import {CustomSplashComponent} from '../pages/custom-splash/custom-splash.component';
 import {LottieAnimationViewModule} from 'ng-lottie';
 import { Floor3Component } from '../components/floor-plans/floor-3/floor-3.component';
 import { Floor4Component } from '../components/floor-plans/floor-4/floor-4.component';
+import {HTTP} from '@ionic-native/http';
+import {UserServiceMock} from '../services/user/user-service-mock';
+import {StallServiceMock} from '../services/stall/stall-service-mock';
 
 
 @NgModule({
@@ -41,7 +43,7 @@ import { Floor4Component } from '../components/floor-plans/floor-4/floor-4.compo
         Floor3Component,
         Floor4Component,
         CustomSplashComponent,
-        StallNamePage
+        StallListPage
     ],
     imports: [
         BrowserModule,
@@ -58,21 +60,25 @@ import { Floor4Component } from '../components/floor-plans/floor-4/floor-4.compo
         StallQRScanPage,
         ProfilePage,
         TabsPage,
-        StallNamePage
+        StallListPage
     ],
     providers: [
         StatusBar,
         SplashScreen,
         Device,
-         QRScanner,
+        QRScanner,
         TextToSpeech,
         TextToSpeechService,
+        HTTP,
         {
             provide: 'TELEMETRY_SERVICE',
             useClass: TelemetryServiceMock
         }, {
             provide: AppPreferences,
             useClass: AppPreferencesMock
+        }, {
+            provide: 'STALL_SERVICE',
+            useClass: StallServiceMock
         }, {
             provide: 'USER_SERVICE',
             useClass: UserServiceMock

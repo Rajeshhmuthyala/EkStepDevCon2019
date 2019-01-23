@@ -1,30 +1,33 @@
-import {Injectable} from '@angular/core';
 import {UserService} from './user.service';
-import {CreateUserProfileResponse} from './response';
-import {
-    CreateUserRpofileRequest,
-    GetUserPrfileRequest,
-    UpdateUserProfileRequest
-} from './requests';
-import {User} from './User';
+import {CreateUserResponse, GetUserResponse, UpdateUserResponse} from './response';
+import {CreateUserRequest, GetUserRequest, UpdateUserRequest} from './requests';
+import {Injectable} from '@angular/core';
 
 @Injectable()
 export class UserServiceMock implements UserService {
-    public async createUser(createUserRequest: CreateUserRpofileRequest): Promise<CreateUserProfileResponse> {
+    public async createUser(createUserRequest: CreateUserRequest): Promise<CreateUserResponse> {
         return {
-            userCode: 'VIS999'
+            Visitor: {
+                code: "SAMPLE_CODE"
+            }
         }
     }
 
-    public async getUser(userId: GetUserPrfileRequest): Promise<User> {
+    public async getUser(getUserRequest: GetUserRequest): Promise<GetUserResponse> {
         return {
-            userName: 'SOMEONE',
-            orgName: 'EkStep'
+            Visitor: {
+                code: "SAMPLE_CODE",
+                org: "SAMPLE_ORG",
+                name: "SAMPLE_NAME"
+            }
         };
     }
 
-    public async updateUserProfile(updateUserProfile: UpdateUserProfileRequest): Promise<string> {
-        return 'Profile Updated Succefully';
+    public async updateUserProfile(updatedUserRequest: UpdateUserRequest): Promise<UpdateUserResponse> {
+        return {
+            Visitor: {
+                code: "SAMPLE_CODE"
+            }
+        };
     }
-
 }
