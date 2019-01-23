@@ -29,7 +29,7 @@ export class HomePage {
     }
 
     ionViewDidEnter() {
-        this.qrCodeWidth = this.platform.width() - 100;
+        this.qrCodeWidth = this.platform.width() - (this.platform.width() * 0.4);
         this.fetchUserDetails();
     }
 

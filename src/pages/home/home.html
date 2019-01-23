@@ -29,19 +29,25 @@
 </ion-header>
 
 
-
-<ion-content>
+<ion-content text-center>
     <ion-fab Bottom right>
         <button ion-fab icon-only (click)="navigateToStallListPage()">
             <ion-icon name="bulb"></ion-icon>
         </button>
     </ion-fab>
 
-    <ion-card no-margin margin-bottom margin-top text-center>
-        <qrcode *ngIf="userResponse" [qrdata]="userResponse?.Visitor.code" [size]="qrCodeWidth" [level]="'M'"></qrcode>
-    </ion-card>
+    <ion-grid>
+        <ion-row>
+            <ion-col text-center margin-top margin-bottom no-border>
+                <qrcode *ngIf="userResponse" [qrdata]="userResponse?.Visitor.code" [size]="qrCodeWidth"
+                        [level]="'M'"></qrcode>
+                <br>
+                <span ion-text [color]="'text-light'">{{userResponse?.Visitor.code}}</span>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 
-    <ion-toolbar no-border-top>
+    <ion-toolbar margin-top>
         <ion-segment no-padding [(ngModel)]="currentSegment">
             <ion-segment-button value="first">
                 1st Floor
