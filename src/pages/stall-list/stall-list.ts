@@ -76,4 +76,31 @@ export class StallListPage {
     private async fetchBoughtIdeas() {
         this.boughtIdeas = await this.stallService.getBoughtIdeas();
     }
+
+    public onRating(idea: Idea, value: number) {
+        this.stallService.giveFeedbackIdea({
+            stallCode: this.currentStall.code,
+            ideaCode: idea.code,
+            details: {
+                stallName: this.currentStall.name,
+                ideaName: idea.name,
+                desc: idea.description,
+                rating: value,
+                comment: ''
+            }
+        }).then(async () => {
+            await this.telemetryService.generateFeedbackTelemetry({
+                dimensions: {
+                    stallId: this.currentStall.code,
+                    stallName: this.currentStall.name,
+                    ideaId: idea.code,
+                    ideaName: idea.name,
+                },
+                edata: {
+                    rating: value,
+                    comment: ''
+                }
+            })
+        });
+    }
 }
