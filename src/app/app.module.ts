@@ -24,8 +24,8 @@ import {Ionic2RatingModule} from 'ionic2-rating';
 import {StallListPage} from '../pages/stall-list/stall-list';
 import {CustomSplashComponent} from '../pages/custom-splash/custom-splash.component';
 import {LottieAnimationViewModule} from 'ng-lottie';
-import {UserServiceImpl} from '../services/user/user-service-impl';
 import {HTTP} from '@ionic-native/http';
+import {UserServiceMock} from '../services/user/user-service-mock';
 
 
 @NgModule({
@@ -75,7 +75,7 @@ import {HTTP} from '@ionic-native/http';
             useClass: AppPreferencesMock
         }, {
             provide: 'USER_SERVICE',
-            useClass: UserServiceImpl
+            useClass: UserServiceMock
         }, {
             provide: 'APP_CONFIG',
             useValue: DevConConfig
