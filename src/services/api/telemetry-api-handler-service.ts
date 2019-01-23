@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
-import {ApiLogger} from './util/api-logger';
-import {ErrorHandler} from './util/error-handler';
 import {HTTP} from '@ionic-native/http';
+import {ApiLogger} from './util/api-logger';
 
 @Injectable()
-export class ApiHandlerService {
+export class TelemetryApiHandlerService {
     constructor(private http: HTTP) {
     }
 
@@ -17,6 +16,6 @@ export class ApiHandlerService {
             'cache-control': 'no-cache',
             'Content-Type': 'application/json',
             'Accept': 'application/json'
-        }).then(async (res) => ErrorHandler.parseApiResponse(res));
+        }).then(async () => undefined);
     }
 }
