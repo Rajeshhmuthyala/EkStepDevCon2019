@@ -1,3 +1,4 @@
+import { PopoverController } from 'ionic-angular';
 import {Component, Inject} from '@angular/core';
 import {StallService} from '../../services/stall/stall-service';
 import {BoughtIdeas} from '../../services/stall/BoughtIdeas';
@@ -5,6 +6,7 @@ import {GetIdeasResponse} from '../../services/stall/responses';
 import {Idea} from '../../services/stall/Idea';
 import {Stall} from '../../services/stall/Stall';
 import {TelemetryService} from '../../services/telemetry/telemetry-services';
+import { RatingPopupComponent } from '../../components/rating-popup/rating-popup';
 
 @Component({
     selector: 'page-stall-list',
@@ -22,7 +24,9 @@ export class StallListPage {
 
     constructor(
         @Inject('STALL_SERVICE') private stallService: StallService,
-        @Inject('TELEMETRY_SERVICE') private telemetryService: TelemetryService) {
+        @Inject('TELEMETRY_SERVICE') private telemetryService: TelemetryService,
+        private popCtrl  : PopoverController
+        ) {
     }
 
     ionViewDidLoad() {
@@ -75,6 +79,20 @@ export class StallListPage {
 
     private async fetchBoughtIdeas() {
         this.boughtIdeas = await this.stallService.getBoughtIdeas();
+    }
+    rateContent(){
+        const popUp = this.popCtrl.create(RatingPopupComponent, {
+              cssClass: 'content-rating-alert'
+            });
+          popUp.present({
+            ev: event
+          });
+        //   popUp.onDidDismiss(data => {
+        //     if (data && data.message === 'rating.success') {
+        //       this.userRating = data.rating;
+        //       this.ratingComment = data.comment;
+        //     }
+        //   });
     }
 
     public onRating(idea: Idea, value: number) {

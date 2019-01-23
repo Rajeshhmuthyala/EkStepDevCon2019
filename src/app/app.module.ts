@@ -1,3 +1,5 @@
+import { RatingPopupComponent } from './../components/rating-popup/rating-popup';
+import { UserServiceMock } from './../services/user/user-service-mock';
 import {UserIdeasPage} from './../pages/user-ideas/user-ideas';
 import {AboutAppuPage} from './../pages/about-appu/about-appu';
 import {BrowserModule} from '@angular/platform-browser';
@@ -49,6 +51,7 @@ import {StallServicesImpl} from '../services/stall/stall-services-impl';
         Floor3Component,
         Floor4Component,
         CustomSplashComponent,
+        RatingPopupComponent,
         StallListPage,
         AboutAppuPage,
         UserIdeasPage
@@ -71,7 +74,9 @@ import {StallServicesImpl} from '../services/stall/stall-services-impl';
         TabsPage,
         StallListPage,
         AboutAppuPage,
-        UserIdeasPage
+        UserIdeasPage,
+        RatingPopupComponent
+
     ],
     providers: [
         StatusBar,
