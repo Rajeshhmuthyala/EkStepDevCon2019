@@ -30,6 +30,7 @@ import {UserServiceImpl} from '../services/user/user-service-impl';
 import {ApiHandlerService} from '../services/api/api-handler-service';
 import {TelemetryServiceImpl} from '../services/telemetry/telemetry-service-impl';
 import {TelemetryApiHandlerService} from '../services/api/telemetry-api-handler-service';
+import {QRCodeModule} from 'angularx-qrcode';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import {TelemetryApiHandlerService} from '../services/api/telemetry-api-handler-
         StallListPage
     ],
     imports: [
+        QRCodeModule,
         BrowserModule,
         IonicModule.forRoot(MyApp),
         LottieAnimationViewModule.forRoot(),

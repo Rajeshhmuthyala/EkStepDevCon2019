@@ -6,12 +6,12 @@
                 <ion-grid>
                     <ion-row>
                         <ion-col text-left no-padding>
-                            <h6 no-padding no-margin>{{name}}</h6>
+                            <h6 no-padding no-margin>{{userResponse?.Visitor.name}}</h6>
                         </ion-col>
                     </ion-row>
                     <ion-row>
                         <ion-col text-left no-padding>
-                            <h6 no-padding no-margin>{{org}}</h6>
+                            <h6 no-padding no-margin>{{userResponse?.Visitor.org}}</h6>
                         </ion-col>
                     </ion-row>
                 </ion-grid>
@@ -32,18 +32,17 @@
 
 <ion-content>
     <ion-fab Bottom right>
-        <button ion-fab icon-only (click)="stallNameCard()">
+        <button ion-fab icon-only (click)="navigateToStallListPage()">
             <ion-icon name="bulb"></ion-icon>
         </button>
     </ion-fab>
-    <!-- <ion-card no-margin margin-bottom margin-top class="w-70"> -->
-    <img class="qr-code" src="assets/imgs/mock-qrcode.png" />
-    <!-- </ion-card> -->
 
-
+    <ion-card no-margin margin-bottom margin-top text-center>
+        <qrcode *ngIf="userResponse" [qrdata]="userResponse?.Visitor.code" [size]="qrCodeWidth" [level]="'M'"></qrcode>
+    </ion-card>
 
     <ion-toolbar no-border-top>
-        <ion-segment no-padding [(ngModel)]="segmentType">
+        <ion-segment no-padding [(ngModel)]="currentSegment">
             <ion-segment-button value="first">
                 1st Floor
             </ion-segment-button>
@@ -60,7 +59,7 @@
     </ion-toolbar>
 
     <div class="box">
-        <div [ngSwitch]="segmentType">
+        <div [ngSwitch]="currentSegment">
 
             <ion-list padding *ngSwitchCase="'first'">
                 <floor-1-plan></floor-1-plan>

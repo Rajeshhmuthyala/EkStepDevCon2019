@@ -1,48 +1,46 @@
 import {Component, Inject, NgZone} from '@angular/core';
-import {NavController} from 'ionic-angular';
+import {App, NavController, Platform} from 'ionic-angular';
 import {AppPreferences} from '@ionic-native/app-preferences';
 import {PreferenceKey} from '../../config/constants';
 import {UserService} from '../../services/user/user.service';
 import {StallListPage} from '../stall-list/stall-list';
 import {GetUserResponse} from '../../services/user/response';
 
+declare const cordova;
+
 @Component({
     selector: 'page-home',
     templateUrl: 'home.html'
 })
 export class HomePage {
-    name: string;
-    org: string;
-    segmentType = "first";
+    public userResponse?: GetUserResponse;
+    public qrCodeWidth?: number;
+
+    currentSegment = "first";
 
     constructor(
         private navCtrl: NavController,
         private appPreference: AppPreferences,
         private zone: NgZone,
+        private app: App,
+        private platform: Platform,
         @Inject('USER_SERVICE') private userService: UserService
     ) {
     }
 
     ionViewDidEnter() {
+        this.qrCodeWidth = this.platform.width() - 100;
         this.fetchUserDetails();
+    }
+
+    navigateToStallListPage() {
+        this.app.getRootNav().setRoot(StallListPage);
     }
 
     private async fetchUserDetails() {
         const userCode: string = await this.appPreference.fetch(PreferenceKey.USER_CODE);
 
-        const userResponse: GetUserResponse = await this.userService.getUser({code: userCode});
-
-        this.zone.run(() => {
-            this.name = userResponse.Visitor.name;
-            this.org = userResponse.Visitor.org;
-        });
-
-        this.name = userResponse.Visitor.name;
-        this.org = userResponse.Visitor.org;
-    }
-
-    stallNameCard() {
-        this.navCtrl.push(StallListPage);
+        this.userResponse = await this.userService.getUser({code: userCode});
     }
 
 }
