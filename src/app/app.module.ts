@@ -1,6 +1,5 @@
-import { UserServiceMock } from './../services/user/user-service-mock';
-import { UserIdeasPage } from './../pages/user-ideas/user-ideas';
-import { AboutAppuPage } from './../pages/about-appu/about-appu';
+import {UserIdeasPage} from './../pages/user-ideas/user-ideas';
+import {AboutAppuPage} from './../pages/about-appu/about-appu';
 import {BrowserModule} from '@angular/platform-browser';
 import {ErrorHandler, NgModule} from '@angular/core';
 import {IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
@@ -28,12 +27,13 @@ import {LottieAnimationViewModule} from 'ng-lottie';
 import {Floor3Component} from '../components/floor-plans/floor-3/floor-3.component';
 import {Floor4Component} from '../components/floor-plans/floor-4/floor-4.component';
 import {HTTP} from '@ionic-native/http';
-import {StallServiceMock} from '../services/stall/stall-service-mock';
 import {UserServiceImpl} from '../services/user/user-service-impl';
 import {ApiHandlerService} from '../services/api/api-handler-service';
 import {TelemetryServiceImpl} from '../services/telemetry/telemetry-service-impl';
 import {TelemetryApiHandlerService} from '../services/api/telemetry-api-handler-service';
 import {QRCodeModule} from 'angularx-qrcode';
+import {PreferenceKey} from '../config/constants';
+import {StallServicesImpl} from '../services/stall/stall-services-impl';
 
 
 @NgModule({
@@ -91,10 +91,10 @@ import {QRCodeModule} from 'angularx-qrcode';
             useClass: AppPreferencesMock
         }, {
             provide: 'STALL_SERVICE',
-            useClass: StallServiceMock
+            useClass: StallServicesImpl
         }, {
             provide: 'USER_SERVICE',
-            useClass: UserServiceMock
+            useClass: UserServiceImpl
         }, {
             provide: 'APP_CONFIG',
             useValue: DevConConfig
@@ -105,4 +105,7 @@ import {QRCodeModule} from 'angularx-qrcode';
     ]
 })
 export class AppModule {
+    constructor() {
+        localStorage.setItem(PreferenceKey.USER_BOUGHT_IDEAS, JSON.stringify({}));
+    }
 }

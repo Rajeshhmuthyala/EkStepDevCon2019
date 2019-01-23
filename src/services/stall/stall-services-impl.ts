@@ -1,10 +1,12 @@
 import {StallService} from './stall-service';
 import {Inject, Injectable} from '@angular/core';
 import {Stall} from './Stall';
-import {GetIdeasRequest, GetStallsRequest} from './requests';
+import {BuyIdeaRequest, FeedbackRequest, GetIdeasRequest, GetStallsRequest} from './requests';
 import {GetIdeasResponse} from './responses';
 import {AppConfig} from '../../config/AppConfig';
 import {ApiHandlerService} from '../api/api-handler-service';
+import {BoughtIdea, BoughtIdeas} from './BoughtIdeas';
+import {PreferenceKey} from '../../config/constants';
 
 @Injectable()
 export class StallServicesImpl implements StallService {
@@ -35,5 +37,46 @@ export class StallServicesImpl implements StallService {
         };
 
         return this.apiHandler.handle(url, body);
+    }
+
+    public async buyIdea(buyIdeaRequest: BuyIdeaRequest): Promise<undefined> {
+        const key = `${buyIdeaRequest.stallCode}-${buyIdeaRequest.ideaCode}`;
+
+        const boughtIdeas: BoughtIdeas = JSON.parse(localStorage.getItem(PreferenceKey.USER_BOUGHT_IDEAS));
+
+        (boughtIdeas[key] as BoughtIdea) = {
+            ...(boughtIdeas[key]) || {},
+            stallName: buyIdeaRequest.details.stallName,
+            ideaName: buyIdeaRequest.details.ideaName,
+            desc: buyIdeaRequest.details.desc,
+            purchased: true
+        };
+
+        localStorage.setItem(PreferenceKey.USER_BOUGHT_IDEAS, JSON.stringify(boughtIdeas));
+
+        return;
+    }
+
+    public async giveFeedbackIdea(feedbackRequest: FeedbackRequest): Promise<undefined> {
+        const key = `${feedbackRequest.stallCode}-${feedbackRequest.ideaCode}`;
+
+        const boughtIdeas: BoughtIdeas = JSON.parse(localStorage.getItem(PreferenceKey.USER_BOUGHT_IDEAS));
+
+        (boughtIdeas[key] as BoughtIdea) = {
+            ...(boughtIdeas[key]) || {},
+            stallName: feedbackRequest.details.stallName,
+            ideaName: feedbackRequest.details.ideaName,
+            desc: feedbackRequest.details.desc,
+            rating: feedbackRequest.details.rating,
+            comment: feedbackRequest.details.comment
+        };
+
+        localStorage.setItem(PreferenceKey.USER_BOUGHT_IDEAS, JSON.stringify(boughtIdeas));
+
+        return;
+    }
+
+    public async getBoughtIdeas(): Promise<BoughtIdeas> {
+        return JSON.parse(localStorage.getItem(PreferenceKey.USER_BOUGHT_IDEAS))
     }
 }

@@ -5,6 +5,7 @@ import {PreferenceKey} from '../../config/constants';
 import {UserService} from '../../services/user/user.service';
 import {StallListPage} from '../stall-list/stall-list';
 import {GetUserResponse} from '../../services/user/response';
+import {StallService} from '../../services/stall/stall-service';
 
 declare const cordova;
 
@@ -24,7 +25,8 @@ export class HomePage {
         private zone: NgZone,
         private app: App,
         private platform: Platform,
-        @Inject('USER_SERVICE') private userService: UserService
+        @Inject('USER_SERVICE') private userService: UserService,
+        @Inject('STALL_SERVICE') private stallService: StallService
     ) {
     }
 
@@ -42,5 +44,4 @@ export class HomePage {
 
         this.userResponse = await this.userService.getUser({code: userCode});
     }
-
 }
