@@ -1,3 +1,5 @@
+import { RatingPopupComponent } from './../components/rating-popup/rating-popup';
+import { UserServiceMock } from './../services/user/user-service-mock';
 import {UserIdeasPage} from './../pages/user-ideas/user-ideas';
 import {AboutAppuPage} from './../pages/about-appu/about-appu';
 import {BrowserModule} from '@angular/platform-browser';
@@ -36,6 +38,11 @@ import {PreferenceKey} from '../config/constants';
 import {StallServicesImpl} from '../services/stall/stall-services-impl';
 import { StallSelectionPage } from '../pages/stall-selection/stall-selection';
 
+// Face API related imports *************
+import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
+import { Camera } from '@ionic-native/camera';
+import { Transfer } from '@ionic-native/transfer';
+
 
 @NgModule({
     declarations: [
@@ -50,6 +57,7 @@ import { StallSelectionPage } from '../pages/stall-selection/stall-selection';
         Floor3Component,
         Floor4Component,
         CustomSplashComponent,
+        RatingPopupComponent,
         StallListPage,
         AboutAppuPage,
         UserIdeasPage,
@@ -74,7 +82,8 @@ import { StallSelectionPage } from '../pages/stall-selection/stall-selection';
         StallListPage,
         AboutAppuPage,
         UserIdeasPage,
-        StallSelectionPage
+        StallSelectionPage,
+        RatingPopupComponent
     ],
     providers: [
         StatusBar,
@@ -86,6 +95,9 @@ import { StallSelectionPage } from '../pages/stall-selection/stall-selection';
         HTTP,
         ApiHandlerService,
         TelemetryApiHandlerService,
+        Base64ToGallery,
+        Camera,
+        Transfer,
         {
             provide: 'TELEMETRY_SERVICE',
             useClass: TelemetryServiceImpl

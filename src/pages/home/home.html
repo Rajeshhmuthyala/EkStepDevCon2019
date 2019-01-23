@@ -39,8 +39,7 @@
     <ion-grid>
         <ion-row>
             <ion-col text-center margin-top margin-bottom no-border>
-                <qrcode *ngIf="userResponse" [qrdata]="userResponse?.Visitor.code" [size]="qrCodeWidth"
-                        [level]="'M'"></qrcode>
+                <qrcode *ngIf="userResponse" [qrdata]="userResponse?.Visitor.code" [size]="qrCodeWidth" [level]="'M'"></qrcode>
                 <br>
                 <span ion-text [color]="'text-light'">{{userResponse?.Visitor.code}}</span>
             </ion-col>
@@ -67,19 +66,19 @@
     <div class="box">
         <div [ngSwitch]="currentSegment">
 
-            <ion-list padding *ngSwitchCase="'first'">
+            <ion-list *ngSwitchCase="'first'">
                 <floor-1-plan></floor-1-plan>
             </ion-list>
 
-            <ion-list padding *ngSwitchCase="'second'">
+            <ion-list *ngSwitchCase="'second'">
                 <floor-2-plan></floor-2-plan>
             </ion-list>
 
-            <ion-list padding *ngSwitchCase="'third'">
+            <ion-list *ngSwitchCase="'third'">
                 <floor-3-plan></floor-3-plan>
             </ion-list>
 
-            <ion-list padding *ngSwitchCase="'fourth'">
+            <ion-list *ngSwitchCase="'fourth'">
                 <floor-4-plan></floor-4-plan>
             </ion-list>
 
