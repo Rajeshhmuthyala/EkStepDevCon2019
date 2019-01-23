@@ -1,11 +1,12 @@
 floor-3-plan {
     .item1 { grid-area: header; }
-.item2 { grid-area: menu; 
-grid-row: 2 / 4;
-}
-.item3 { grid-area: main; }
-.item4 { grid-area: right; }
-.item5 { grid-area: footer; }
+    .item2 { 
+        grid-area: menu; 
+        grid-row: 2 / 4;
+    }
+    .item3 { grid-area: main; }
+    .item4 { grid-area: right; }
+    .item5 { grid-area: footer; }
 
 .grid-container {
   display: grid;
@@ -17,36 +18,38 @@ grid-row: 2 / 4;
   background-color: #2196F3;
   padding: 10px;
 }
+
 ion-card img {
     display: block;
     width: 80%;
     margin-top: 13px;
 }
+
 .middle {
     height: 350px;
     // padding: 16px;
     text-align: center;
     margin-top: -10px;
     p {
-
         width: 120px;
         margin-left: auto;
         margin-right: auto;
         position: relative;
         top: 50%;
-        transform: translateY(-50%);
+        transform: translateY(-50%) rotate(90deg);
         color: white;
         font-size: 1em;
     }
     /* border: 18px; */
 }
+
 ion-col.col {
     border-radius: 11px;
 }
+
 ion-row.toprow.row {
     height: 80px;
     p {
-
         width: 120px;
         margin-left: auto;
         margin-right: auto;
@@ -57,11 +60,11 @@ ion-row.toprow.row {
         font-size: 1em;
     }
 }
+
 ion-row.footerrow {
     height: 80px;
     p {
-
-        width: 120px;
+        width: 160px;
         margin-left: auto;
         margin-right: auto;
         position: relative;
@@ -70,14 +73,15 @@ ion-row.footerrow {
         color: white;
         font-size: 1em;
     }
-    
 }
+
 ion-col.quality1.col {
     margin-top: 15px;
     width: 100px;
     background-color:green;
     height:300px;
 }
+
 ion-col.quality2.col {
     margin-bottom: 15px;
     width: 100px;
