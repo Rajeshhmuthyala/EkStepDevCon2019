@@ -2,7 +2,6 @@ import {Component, Inject, NgZone} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {AppPreferences} from '@ionic-native/app-preferences';
 import {PreferenceKey} from '../../config/constants';
-import {GetUserRequest} from '../../services/user/requests';
 import {UserService} from '../../services/user/user.service';
 import {StallListPage} from '../stall-list/stall-list';
 import {GetUserResponse} from '../../services/user/response';
@@ -29,9 +28,9 @@ export class HomePage {
     }
 
     private async fetchUserDetails() {
-        const createUserResponse: GetUserRequest = await this.appPreference.fetch(PreferenceKey.USER_CODE);
+        const userCode: string = await this.appPreference.fetch(PreferenceKey.USER_CODE);
 
-        const userResponse: GetUserResponse = await this.userService.getUser(createUserResponse);
+        const userResponse: GetUserResponse = await this.userService.getUser({code: userCode});
 
         this.zone.run(() => {
             this.name = userResponse.Visitor.name;

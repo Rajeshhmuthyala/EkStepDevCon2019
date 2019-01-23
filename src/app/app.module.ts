@@ -25,8 +25,9 @@ import {StallListPage} from '../pages/stall-list/stall-list';
 import {CustomSplashComponent} from '../pages/custom-splash/custom-splash.component';
 import {LottieAnimationViewModule} from 'ng-lottie';
 import {HTTP} from '@ionic-native/http';
-import {UserServiceMock} from '../services/user/user-service-mock';
 import {StallServiceMock} from '../services/stall/stall-service-mock';
+import {UserServiceImpl} from '../services/user/user-service-impl';
+import {ApiHandlerService} from '../services/api/api-handler-service';
 
 
 @NgModule({
@@ -68,6 +69,7 @@ import {StallServiceMock} from '../services/stall/stall-service-mock';
         TextToSpeech,
         TextToSpeechService,
         HTTP,
+        ApiHandlerService,
         {
             provide: 'TELEMETRY_SERVICE',
             useClass: TelemetryServiceMock
@@ -79,7 +81,7 @@ import {StallServiceMock} from '../services/stall/stall-service-mock';
             useClass: StallServiceMock
         }, {
             provide: 'USER_SERVICE',
-            useClass: UserServiceMock
+            useClass: UserServiceImpl
         }, {
             provide: 'APP_CONFIG',
             useValue: DevConConfig

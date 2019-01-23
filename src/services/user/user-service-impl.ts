@@ -2,9 +2,8 @@ import {UserService} from './user.service';
 import {CreateUserRequest, GetUserRequest, UpdateUserRequest} from './requests';
 import {CreateUserResponse, GetUserResponse, UpdateUserResponse} from './response';
 import {Inject, Injectable} from '@angular/core';
+import {ApiHandlerService} from '../api/api-handler-service';
 import {AppConfig} from '../../config/AppConfig';
-import {HTTP, HTTPResponse} from '@ionic-native/http';
-import {ErrorHandler} from '../api/util/error-handler';
 
 @Injectable()
 export class UserServiceImpl implements UserService {
@@ -12,29 +11,40 @@ export class UserServiceImpl implements UserService {
     private static GET_USER_ENDPOINT = '/read-dev';
     private static UPDATE_USER_ENDPOINT = '/update';
 
-    constructor(private http: HTTP,
+    constructor(private apiHandler: ApiHandlerService,
                 @Inject('APP_CONFIG') private appConfig: AppConfig) {
     }
 
     createUser(createUserRequest: CreateUserRequest): Promise<CreateUserResponse> {
-        return this.http.post(this.appConfig.baseUrl + UserServiceImpl.CREATE_USER_ENDPOINT, {
+        const url = this.appConfig.baseUrl + UserServiceImpl.CREATE_USER_ENDPOINT;
+
+        const body = {
             id: "open-saber.registry.create",
             request: createUserRequest
-        }, {}).then(async (res: HTTPResponse) => ErrorHandler.parseApiResponse(res));
+        };
+
+        return this.apiHandler.handle(url, body);
     }
 
     getUser(getUserRequest: GetUserRequest): Promise<GetUserResponse> {
-        return this.http.post(this.appConfig.baseUrl + UserServiceImpl.GET_USER_ENDPOINT, {
+        const url = this.appConfig.baseUrl + UserServiceImpl.GET_USER_ENDPOINT
+
+        const body = {
             id: "open-saber.registry.read",
             request: getUserRequest
-        }, {}).then(async (res: HTTPResponse) => ErrorHandler.parseApiResponse(res));
+        };
+
+        return this.apiHandler.handle(url, body);
     }
 
     updateUserProfile(updatedUserRequest: UpdateUserRequest): Promise<UpdateUserResponse> {
-        return this.http.post(this.appConfig.baseUrl + UserServiceImpl.UPDATE_USER_ENDPOINT, {
+        const url = this.appConfig.baseUrl + UserServiceImpl.UPDATE_USER_ENDPOINT;
+
+        const body = {
             id: "open-saber.registry.update",
             request: updatedUserRequest
-        }, {}).then(async (res: HTTPResponse) => ErrorHandler.parseApiResponse(res));
-    }
+        };
 
+        return this.apiHandler.handle(url, body);
+    }
 }
