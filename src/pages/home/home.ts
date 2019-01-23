@@ -51,7 +51,7 @@ export class HomePage {
         
         this.userResponse = await this.userService.getUser({code: userCode});
          
-        await loader.dismiss();  
+         loader.dismiss();  
      
     }
 
