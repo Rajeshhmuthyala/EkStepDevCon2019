@@ -3,6 +3,7 @@ import {GetIdeasResponse} from './responses';
 import {Stall} from './Stall';
 import {BoughtIdeas} from './BoughtIdeas';
 
+
 export interface StallService {
     getStalls(getStallsRequest: GetStallsRequest): Promise<Stall[]>;
 

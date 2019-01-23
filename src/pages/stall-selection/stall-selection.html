@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar hideBackButton= true>
+      <ion-title>Stall Selection</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="container">
+        <form  [formGroup]="stallForm" (ngSubmit)="StallSubmit($event)" name="stallForm">
+        <ion-card class="form-field">
+        <ion-item>
+          <ion-label stacked text-uppercase>Select Stall</ion-label>
+          <ion-select multiple="false" text-capitalize (ionChange)="onStallSelect()" formControlName="stallName">
+              
+              <ion-option *ngFor="let stall of stallcode" [value]="stall.code">{{stall.name}}</ion-option>
+        
+    
+          </ion-select>
+      </ion-item>
+      </ion-card>
+      <ion-card class="form-field">
+          <ion-item>
+              <ion-label stacked text-uppercase>Select Ideas</ion-label>
+              <ion-select multiple="false" text-capitalize formControlName="stallIdea">
+                  <ion-option *ngFor="let idea of ideasResponse" [value]="idea.code">{{idea.name}}</ion-option>
+                
+              </ion-select>
+          </ion-item>
+      </ion-card>
+      <button ion-button full type="submit" color="primary" [disabled]="!stallForm.valid">Submit-To-Scan </button>
+    </form>
+    </ion-content>
+    <!-- [disabled]="!stallForm.valid" -->

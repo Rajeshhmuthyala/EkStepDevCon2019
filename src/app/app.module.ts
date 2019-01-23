@@ -36,6 +36,7 @@ import {TelemetryApiHandlerService} from '../services/api/telemetry-api-handler-
 import {QRCodeModule} from 'angularx-qrcode';
 import {PreferenceKey} from '../config/constants';
 import {StallServicesImpl} from '../services/stall/stall-services-impl';
+import { StallSelectionPage } from '../pages/stall-selection/stall-selection';
 
 // Face API related imports *************
 import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
@@ -59,7 +60,8 @@ import { Transfer } from '@ionic-native/transfer';
         RatingPopupComponent,
         StallListPage,
         AboutAppuPage,
-        UserIdeasPage
+        UserIdeasPage,
+        StallSelectionPage
     ],
     imports: [
         QRCodeModule,
@@ -80,8 +82,8 @@ import { Transfer } from '@ionic-native/transfer';
         StallListPage,
         AboutAppuPage,
         UserIdeasPage,
+        StallSelectionPage,
         RatingPopupComponent
-
     ],
     providers: [
         StatusBar,

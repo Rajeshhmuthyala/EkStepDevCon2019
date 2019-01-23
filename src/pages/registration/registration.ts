@@ -22,6 +22,7 @@ import { Camera, DestinationType, EncodingType, Direction } from '@ionic-native/
 import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
 import { Transfer, TransferObject } from '@ionic-native/transfer';
 import { HTTP } from '@ionic-native/http';
+import { StallSelectionPage } from '../stall-selection/stall-selection';
 
 @Component({
     selector: 'page-registration',
@@ -104,7 +105,7 @@ export class RegistrationPage {
             popover.present();
 
             popover.onDidDismiss(() => {
-                this.navCtrl.push(StallQRScanPage, {});
+                this.navCtrl.push(StallSelectionPage, {});
             });
         }
         if (this.resetCountTimer) {
