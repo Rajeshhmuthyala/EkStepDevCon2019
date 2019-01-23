@@ -13,7 +13,8 @@ export class ApiHandlerService {
 
         this.http.setDataSerializer('json');
 
-        return this.http.post(url, body, {})
-            .then(async (res) => ErrorHandler.parseApiResponse(res));
+        return this.http.post(url, body, {
+            'Accept': 'application/json'
+        }).then(async (res) => ErrorHandler.parseApiResponse(res));
     }
 }
