@@ -1,3 +1,5 @@
+import { UserIdeasPage } from './../pages/user-ideas/user-ideas';
+import { AboutAppuPage } from './../pages/about-appu/about-appu';
 import {BrowserModule} from '@angular/platform-browser';
 import {ErrorHandler, NgModule} from '@angular/core';
 import {IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
@@ -29,6 +31,7 @@ import {HTTP} from '@ionic-native/http';
 import {StallServiceMock} from '../services/stall/stall-service-mock';
 import {UserServiceImpl} from '../services/user/user-service-impl';
 import {ApiHandlerService} from '../services/api/api-handler-service';
+import { UserServiceMock } from '../services/user/user-service-mock';
 
 
 @NgModule({
@@ -44,7 +47,9 @@ import {ApiHandlerService} from '../services/api/api-handler-service';
         Floor3Component,
         Floor4Component,
         CustomSplashComponent,
-        StallListPage
+        StallListPage,
+        AboutAppuPage,
+        UserIdeasPage
     ],
     imports: [
         BrowserModule,
@@ -61,7 +66,9 @@ import {ApiHandlerService} from '../services/api/api-handler-service';
         StallQRScanPage,
         ProfilePage,
         TabsPage,
-        StallListPage
+        StallListPage,
+        AboutAppuPage,
+        UserIdeasPage
     ],
     providers: [
         StatusBar,
@@ -83,7 +90,7 @@ import {ApiHandlerService} from '../services/api/api-handler-service';
             useClass: StallServiceMock
         }, {
             provide: 'USER_SERVICE',
-            useClass: UserServiceImpl
+            useClass: UserServiceMock
         }, {
             provide: 'APP_CONFIG',
             useValue: DevConConfig
