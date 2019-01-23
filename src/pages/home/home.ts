@@ -4,7 +4,7 @@ import {AppPreferences} from '@ionic-native/app-preferences';
 import {PreferenceKey} from '../../config/constants';
 import {GetUserRequest} from '../../services/user/requests';
 import {UserService} from '../../services/user/user.service';
-import {StallNamePage} from '../stall-name/stall-name';
+import {StallListPage} from '../stall-list/stall-list';
 import {GetUserResponse} from '../../services/user/response';
 
 @Component({
@@ -43,7 +43,7 @@ export class HomePage {
     }
 
     stallNameCard() {
-        this.navCtrl.push(StallNamePage);
+        this.navCtrl.push(StallListPage);
     }
 
 }

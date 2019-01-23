@@ -18,9 +18,10 @@ import {TabsPage} from '../pages/tabs/tabs';
 import {TextToSpeechService} from '../services/text-to-speech';
 import {Floor1Component} from '../components/floor-plans/floor-1/floor-1.component';
 import {Floor2Component} from '../components/floor-plans/floor-2/floor-2.component';
+import {Floor3Component} from '../components/floor-plans/floor-3/floor-3.component';
 import {TelemetryServiceMock} from '../services/telemetry/telemetry-service-mock';
 import {Ionic2RatingModule} from 'ionic2-rating';
-import {StallNamePage} from '../pages/stall-name/stall-name';
+import {StallListPage} from '../pages/stall-list/stall-list';
 import {CustomSplashComponent} from '../pages/custom-splash/custom-splash.component';
 import {LottieAnimationViewModule} from 'ng-lottie';
 import {UserServiceImpl} from '../services/user/user-service-impl';
@@ -37,8 +38,9 @@ import {HTTP} from '@ionic-native/http';
         TabsPage,
         Floor1Component,
         Floor2Component,
+        Floor3Component,
         CustomSplashComponent,
-        StallNamePage
+        StallListPage
     ],
     imports: [
         BrowserModule,
@@ -55,7 +57,7 @@ import {HTTP} from '@ionic-native/http';
         StallQRScanPage,
         ProfilePage,
         TabsPage,
-        StallNamePage
+        StallListPage
     ],
     providers: [
         StatusBar,

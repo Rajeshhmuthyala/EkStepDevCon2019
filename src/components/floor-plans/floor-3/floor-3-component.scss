@@ -1,11 +1,12 @@
-floor-2-plan {
+floor-3-plan {
     .item1 { grid-area: header; }
-.item2 { grid-area: menu; 
-grid-row: 2 / 4;
-}
-.item3 { grid-area: main; }
-.item4 { grid-area: right; }
-.item5 { grid-area: footer; }
+    .item2 { 
+        grid-area: menu; 
+        grid-row: 2 / 4;
+    }
+    .item3 { grid-area: main; }
+    .item4 { grid-area: right; }
+    .item5 { grid-area: footer; }
 
 .grid-container {
   display: grid;
@@ -49,7 +50,7 @@ ion-col.col {
 ion-row.toprow.row {
     height: 80px;
     p {
-        width: 188px;
+        width: 120px;
         margin-left: auto;
         margin-right: auto;
         position: relative;
@@ -63,7 +64,7 @@ ion-row.toprow.row {
 ion-row.footerrow {
     height: 80px;
     p {
-        width: 120px;
+        width: 160px;
         margin-left: auto;
         margin-right: auto;
         position: relative;
@@ -71,20 +72,20 @@ ion-row.footerrow {
         transform: translateY(-50%);
         color: white;
         font-size: 1em;
-    }   
+    }
 }
 
 ion-col.quality1.col {
     margin-top: 15px;
     width: 100px;
     background-color:green;
-    height:150px;
+    height:300px;
 }
 
 ion-col.quality2.col {
     margin-bottom: 15px;
     width: 100px;
-    background-color: cornflowerblue;
+    background-color:yellow;
     height:150px;
 }
 

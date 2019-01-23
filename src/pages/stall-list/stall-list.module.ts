@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { StallNamePage } from './stall-name';
+import { StallListPage } from './stall-list';
 import { Ionic2RatingModule } from 'ionic2-rating';
 
 @NgModule({
   declarations: [
-    StallNamePage,
+    StallListPage,
   ],
   imports: [
-    IonicPageModule.forChild(StallNamePage),
+    IonicPageModule.forChild(StallListPage),
     Ionic2RatingModule
   ],
 })

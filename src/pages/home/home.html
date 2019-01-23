@@ -18,6 +18,8 @@
             </button>
         </ion-buttons>
 
+
+
         <ion-buttons right>
             <button ion-button icon-only>
                 <h6 no-padding no-margin>9999 $</h6>
@@ -26,52 +28,57 @@
     </ion-navbar>
 </ion-header>
 
+
+
 <ion-content>
     <ion-fab Bottom right>
         <button ion-fab icon-only (click)="stallNameCard()">
             <ion-icon name="bulb"></ion-icon>
         </button>
     </ion-fab>
-
     <!-- <ion-card no-margin margin-bottom margin-top class="w-70"> -->
-        <img class="qr-code" src="assets/imgs/mock-qrcode.png"/>
+    <img class="qr-code" src="assets/imgs/mock-qrcode.png" />
     <!-- </ion-card> -->
+
+
 
     <ion-toolbar no-border-top>
         <ion-segment no-padding [(ngModel)]="segmentType">
             <ion-segment-button value="first">
-                1st
+                1st Floor
             </ion-segment-button>
             <ion-segment-button value="second">
-                2nd
+                2nd Floor
             </ion-segment-button>
             <ion-segment-button value="third">
-                3rd
+                3rd Floor
             </ion-segment-button>
             <ion-segment-button value="fourth">
-                4th
+                4th Floor
             </ion-segment-button>
         </ion-segment>
     </ion-toolbar>
+
     <div class="box">
         <div [ngSwitch]="segmentType">
+
             <ion-list padding *ngSwitchCase="'first'">
-                <ion-card no-margin margin-bottom margin-top padding class="w-100">
-                    <floor-1-plan></floor-1-plan>
-                </ion-card>
+                <floor-1-plan></floor-1-plan>
             </ion-list>
+
             <ion-list padding *ngSwitchCase="'second'">
-                <ion-card no-margin margin-bottom margin-top padding class="w-100">
-                    <floor-2-plan></floor-2-plan>
-                </ion-card>
+                <floor-2-plan></floor-2-plan>
             </ion-list>
+
             <ion-list padding *ngSwitchCase="'third'">
-                3rd floor
+                <floor-3-plan></floor-3-plan>
             </ion-list>
+
             <ion-list padding *ngSwitchCase="'fourth'">
-                4th floor
+                <floor-3-plan></floor-3-plan>
             </ion-list>
 
         </div>
     </div>
+
 </ion-content>
