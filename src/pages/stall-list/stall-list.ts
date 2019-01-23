@@ -10,10 +10,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-stall-name',
-  templateUrl: 'stall-name.html',
+  selector: 'page-stall-list',
+  templateUrl: 'stall-list.html',
 })
-export class StallNamePage {
+export class StallListPage {
 
   storeOptions = {
     title: 'Select Store',
@@ -23,7 +23,7 @@ export class StallNamePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad StallNamePage');
+    console.log('ionViewDidLoad StallListPage');
   }
 
 }
