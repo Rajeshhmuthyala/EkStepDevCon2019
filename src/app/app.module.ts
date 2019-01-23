@@ -34,6 +34,7 @@ import {TelemetryApiHandlerService} from '../services/api/telemetry-api-handler-
 import {QRCodeModule} from 'angularx-qrcode';
 import {PreferenceKey} from '../config/constants';
 import {StallServicesImpl} from '../services/stall/stall-services-impl';
+import { StallSelectionPage } from '../pages/stall-selection/stall-selection';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import {StallServicesImpl} from '../services/stall/stall-services-impl';
         CustomSplashComponent,
         StallListPage,
         AboutAppuPage,
-        UserIdeasPage
+        UserIdeasPage,
+        StallSelectionPage
     ],
     imports: [
         QRCodeModule,
@@ -71,7 +73,8 @@ import {StallServicesImpl} from '../services/stall/stall-services-impl';
         TabsPage,
         StallListPage,
         AboutAppuPage,
-        UserIdeasPage
+        UserIdeasPage,
+        StallSelectionPage
     ],
     providers: [
         StatusBar,

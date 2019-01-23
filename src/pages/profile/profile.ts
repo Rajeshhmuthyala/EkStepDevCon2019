@@ -4,6 +4,8 @@ import {IonicPage,
     NavParams,
     ViewController
 } from 'ionic-angular';
+// import { StallQRScanPage } from '../stall-qr-scan/stall-qr-scan.component';
+import { StallSelectionPage } from '../stall-selection/stall-selection';
 import { StallQRScanPage } from '../stall-qr-scan/stall-qr-scan.component';
 
 @IonicPage()
@@ -27,6 +29,8 @@ export class ProfilePage {
     }
 
     openQRScanner() {
+        console.log('qrscan logged');
+        this.navCtrl.push(StallSelectionPage, {});
         this.viewCtrl.dismiss();
     }
 }

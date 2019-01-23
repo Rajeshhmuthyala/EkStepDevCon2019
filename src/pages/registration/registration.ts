@@ -10,6 +10,7 @@ import {TabsPage} from '../tabs/tabs';
 import {StallQRScanPage} from '../stall-qr-scan/stall-qr-scan.component';
 import {TelemetryService} from '../../services/telemetry/telemetry-services';
 import {ProfilePage} from '../profile/profile';
+import { StallSelectionPage } from '../stall-selection/stall-selection';
 
 @Component({
     selector: 'page-registration',
@@ -79,7 +80,7 @@ export class RegistrationPage {
             popover.present();
 
             popover.onDidDismiss(() => {
-                this.navCtrl.push(StallQRScanPage, {});
+                this.navCtrl.push(StallSelectionPage, {});
             });
         }
         if (this.resetCountTimer) {
