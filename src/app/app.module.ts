@@ -25,6 +25,7 @@ import {StallNamePage} from '../pages/stall-name/stall-name';
 import {CustomSplashComponent} from '../pages/custom-splash/custom-splash.component';
 import {LottieAnimationViewModule} from 'ng-lottie';
 import { Floor3Component } from '../components/floor-plans/floor-3/floor-3.component';
+import { Floor4Component } from '../components/floor-plans/floor-4/floor-4.component';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { Floor3Component } from '../components/floor-plans/floor-3/floor-3.compo
         Floor1Component,
         Floor2Component,
         Floor3Component,
+        Floor4Component,
         CustomSplashComponent,
         StallNamePage
     ],
