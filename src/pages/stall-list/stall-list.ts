@@ -1,4 +1,4 @@
-import { PopoverController } from 'ionic-angular';
+import {LoadingController, PopoverController} from 'ionic-angular';
 import {Component, Inject} from '@angular/core';
 import {StallService} from '../../services/stall/stall-service';
 import {BoughtIdeas} from '../../services/stall/BoughtIdeas';
@@ -6,8 +6,8 @@ import {GetIdeasResponse} from '../../services/stall/responses';
 import {Idea} from '../../services/stall/Idea';
 import {Stall} from '../../services/stall/Stall';
 import {TelemetryService} from '../../services/telemetry/telemetry-services';
-import { RatingPopupComponent } from '../../components/rating-popup/rating-popup';
-import {LoadingController} from 'ionic-angular';
+import {RatingPopupComponent} from '../../components/rating-popup/rating-popup';
+import {Subscription} from 'rxjs';
 
 @Component({
     selector: 'page-stall-list',
@@ -22,6 +22,7 @@ export class StallListPage {
     };
     private currentStall: Stall;
     private boughtIdeas: BoughtIdeas = {};
+    private boughtIdeasSubscription: Subscription;
 
     constructor(
         @Inject('STALL_SERVICE') private stallService: StallService,
@@ -34,7 +35,12 @@ export class StallListPage {
         this.fetchStalls().then(() => {
             this.onStallSelect(this.stalls[0]);
         });
+
         this.fetchBoughtIdeas();
+    }
+
+    ionViewWillLeave() {
+        this.boughtIdeasSubscription.unsubscribe();
     }
 
     public isIdeaBought(ideaCode: string): boolean {
@@ -62,8 +68,6 @@ export class StallListPage {
                 },
                 edata: {}
             })
-        }).then(() => {
-            this.fetchBoughtIdeas();
         });
     }
 
@@ -93,22 +97,20 @@ export class StallListPage {
         loader.dismiss();
     }
 
-    private async fetchBoughtIdeas() {
-        this.boughtIdeas = await this.stallService.getBoughtIdeas();
-    }
-    rateContent(){
+    public onClickToAddFeedback() {
         const popUp = this.popCtrl.create(RatingPopupComponent, {
               cssClass: 'content-rating-alert'
             });
           popUp.present({
             ev: event
           });
-        //   popUp.onDidDismiss(data => {
-        //     if (data && data.message === 'rating.success') {
-        //       this.userRating = data.rating;
-        //       this.ratingComment = data.comment;
-        //     }
-        //   });
+    }
+
+    private fetchBoughtIdeas() {
+        this.boughtIdeasSubscription = this.stallService.getBoughtIdeas().subscribe((emit) => {
+            this.boughtIdeas = emit;
+            console.log(emit);
+        });
     }
 
     public onRating(idea: Idea, value: number) {

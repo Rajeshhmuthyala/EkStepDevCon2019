@@ -2,6 +2,7 @@ import {BuyIdeaRequest, FeedbackRequest, GetIdeasRequest, GetStallsRequest} from
 import {GetIdeasResponse} from './responses';
 import {Stall} from './Stall';
 import {BoughtIdeas} from './BoughtIdeas';
+import {Observable} from 'rxjs';
 
 
 export interface StallService {
@@ -13,5 +14,5 @@ export interface StallService {
 
     buyIdea(buyIdeaRequest: BuyIdeaRequest): Promise<undefined>;
 
-    getBoughtIdeas(): Promise<BoughtIdeas>;
+    getBoughtIdeas(): Observable<BoughtIdeas>;
 }

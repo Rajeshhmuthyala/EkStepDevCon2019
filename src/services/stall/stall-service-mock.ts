@@ -5,6 +5,7 @@ import {Stall} from './Stall';
 import {Injectable} from '@angular/core';
 import {BoughtIdea, BoughtIdeas} from './BoughtIdeas';
 import {PreferenceKey} from '../../config/constants';
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class StallServiceMock implements StallService {
@@ -100,7 +101,7 @@ export class StallServiceMock implements StallService {
         return;
     }
 
-    public async getBoughtIdeas(): Promise<BoughtIdeas> {
-        return JSON.parse(localStorage.getItem(PreferenceKey.USER_BOUGHT_IDEAS))
+    public getBoughtIdeas(): Observable<BoughtIdeas> {
+        throw new Error('No implementation');
     }
 }

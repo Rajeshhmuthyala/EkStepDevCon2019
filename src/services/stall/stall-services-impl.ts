@@ -7,11 +7,15 @@ import {AppConfig} from '../../config/AppConfig';
 import {ApiHandlerService} from '../api/api-handler-service';
 import {BoughtIdea, BoughtIdeas} from './BoughtIdeas';
 import {PreferenceKey} from '../../config/constants';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 @Injectable()
 export class StallServicesImpl implements StallService {
     private static GET_STALLS_ENDPOINT = '/search';
     private static GET_IDEAS_ENDPOINT = '/read-dev';
+
+    private boughtIdeas$: BehaviorSubject<BoughtIdeas> =
+        new BehaviorSubject<BoughtIdeas>(JSON.parse(localStorage.getItem(PreferenceKey.USER_BOUGHT_IDEAS)));
 
     constructor(private apiHandler: ApiHandlerService,
                 @Inject('APP_CONFIG') private appConfig: AppConfig) {
@@ -54,6 +58,8 @@ export class StallServicesImpl implements StallService {
 
         localStorage.setItem(PreferenceKey.USER_BOUGHT_IDEAS, JSON.stringify(boughtIdeas));
 
+        this.boughtIdeas$.next(boughtIdeas);
+
         return;
     }
 
@@ -73,10 +79,12 @@ export class StallServicesImpl implements StallService {
 
         localStorage.setItem(PreferenceKey.USER_BOUGHT_IDEAS, JSON.stringify(boughtIdeas));
 
+        this.boughtIdeas$.next(boughtIdeas);
+
         return;
     }
 
-    public async getBoughtIdeas(): Promise<BoughtIdeas> {
-        return JSON.parse(localStorage.getItem(PreferenceKey.USER_BOUGHT_IDEAS))
+    public getBoughtIdeas(): Observable<BoughtIdeas> {
+        return this.boughtIdeas$;
     }
 }

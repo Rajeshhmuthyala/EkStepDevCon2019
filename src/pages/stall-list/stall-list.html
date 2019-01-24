@@ -31,8 +31,8 @@
     <div style="margin-top: -8px; padding: 16px"><b>Rate Us:</b></div>
     <ion-row no-padding>
       <ion-col style="margin-top: -35px; margin-left: 5px">
-        <rating readOnly="false" max="5" (click)="rateContent()" (ngModelChange)="onRating(idea, $event)"
-          emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false">
+          <rating [readOnly]="true" max="5" (click)="onClickToAddFeedback()"
+                  emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false">
         </rating>
       </ion-col>
       <ion-col end>
