@@ -1,8 +1,10 @@
 import {Component, Inject} from '@angular/core';
 import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
-import {FormBuilder, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {StallService} from '../../services/stall/stall-service';
 import {StallQRScanPage} from '../stall-qr-scan/stall-qr-scan.component';
+import {Stall} from '../../services/stall/Stall';
+import {Idea} from '../../services/stall/Idea';
 
 /**
  * Generated class for the StallSelectionPage page.
@@ -18,10 +20,11 @@ import {StallQRScanPage} from '../stall-qr-scan/stall-qr-scan.component';
 })
 export class StallSelectionPage {
 
-    stallForm: any;
-    ideasResponse: any;
-    stallcode: any;
-
+    stallForm: FormGroup;
+    ideasResponse: Idea[] = [];
+    stallResponse: Stall[] = [];
+    private selectedStall?: Stall;
+    private selectedIdea?: Idea;
 
     constructor(
         public navCtrl: NavController,
@@ -33,8 +36,8 @@ export class StallSelectionPage {
 
     initializeForm() {
         this.stallForm = this.fb.group({
-            stallName: ['', Validators.required],
-            stallIdea: ['', Validators.required]
+            stallName: [null, Validators.required],
+            stallIdea: [null, Validators.required]
         });
     }
 
@@ -42,21 +45,25 @@ export class StallSelectionPage {
         this.fetchStallDetails();
     }
 
-    public onStallSelect() {
-        const stallCode = this.stallForm.value.stallName;
-        this.stallService.getIdeas({code: stallCode}).then((data) => {
+    public onStallSelect(stall: Stall) {
+        this.selectedStall = stall;
+
+        this.stallService.getIdeas({code: stall.code}).then((data) => {
             this.ideasResponse = data.Stall.ideas;
         });
 
     }
 
-    StallSubmit() {
+    public onIdeaSelect(idea: Idea) {
+        this.selectedIdea = idea;
+    }
+
+    onSubmit() {
         this.navCtrl.push(StallQRScanPage, {});
         this.viewCtrl.dismiss();
     }
 
     private async fetchStallDetails() {
-        // this.stallForm = await this.stallService.getStalls({ Stall: {} });
-        this.stallcode = await this.stallService.getStalls({Stall: {}});
+        this.stallResponse = await this.stallService.getStalls({Stall: {}});
     }
 }
