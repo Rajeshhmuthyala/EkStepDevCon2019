@@ -1,11 +1,12 @@
-import {Component, ElementRef, ViewChild, Inject} from '@angular/core';;
-import {NavController, Platform, ViewController, ToastController, ToastOptions} from 'ionic-angular';
+import {Component, ElementRef, Inject, ViewChild} from '@angular/core';
+import {NavController, Platform, ToastController, ToastOptions, ViewController} from 'ionic-angular';
 import {QRScanner, QRScannerStatus} from '@ionic-native/qr-scanner';
-import {ProfilePage} from '../profile/profile';
 import {AppPreferences} from '@ionic-native/app-preferences';
-import {PreferenceKey} from '../../config/constants';
 import {UserService} from '../../services/user/user.service';
 import {GetUserResponse} from '../../services/user/response';
+
+;
+
 @Component({
     templateUrl: './stall-qr-scan.component.html',
     selector: 'stall-qr-scan-page'
@@ -31,10 +32,6 @@ export class StallQRScanPage {
     }
 
     QRScanner() {
-        console.log('coming inside');
-        // if (this.platform.is('core') || this.platform.is('mobileweb')) {
-        //     return this.navCtrl.push(ProfilePage, {userCode: 'SAMPLE_USER_CODE'});
-        // }
         this.handleBackButton()
         this.qrScanner.prepare()
             .then((status: QRScannerStatus) => {
@@ -46,11 +43,6 @@ export class StallQRScanPage {
                         console.log('this should be different page');
                         console.log(text);
                         this.fetchUserDetails(text);
-                        // this.navCtrl.push(ProfilePage, {userCode: text});
-                        // Should be different page, flow changed
-
-                        // this.qrScanner.destroy();
-                        // this.qrScanner.hide();
                         scanSub.unsubscribe();
                         this.showContentBG();
                     });
@@ -62,13 +54,13 @@ export class StallQRScanPage {
             .catch((e: any) => console.log('Error is', e));
 
     }
-    private async fetchUserDetails(text) {
-        // const userCode: string = await this.appPreference.fetch(PreferenceKey.USER_CODE);
 
+    private async fetchUserDetails(text) {
         this.userResponse = await this.userService.getUser({code: text});
         console.log(this.userResponse.Visitor.name);
         this.showToast(this.userResponse.Visitor.name);
     }
+
     private hideContentBG() {
         (this.content.nativeElement as HTMLElement).setAttribute('hidden', 'true')
     }
@@ -76,6 +68,7 @@ export class StallQRScanPage {
     private showContentBG() {
         (this.content.nativeElement as HTMLElement).removeAttribute('hidden');
     }
+
     handleBackButton() {
         this.backButtonFunc = this.platform.registerBackButtonAction(() => {
             this.showContentBG();
@@ -84,6 +77,7 @@ export class StallQRScanPage {
             this.backButtonFunc();
         }, 10);
     }
+
     showToast(msg: string) {
         const toastOptions: ToastOptions = {
           message: msg,

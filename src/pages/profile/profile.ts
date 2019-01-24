@@ -1,12 +1,7 @@
 import {Component} from '@angular/core';
-import {IonicPage,
-    NavController,
-    NavParams,
-    ViewController
-} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
 // import { StallQRScanPage } from '../stall-qr-scan/stall-qr-scan.component';
-import { StallSelectionPage } from '../stall-selection/stall-selection';
-import { StallQRScanPage } from '../stall-qr-scan/stall-qr-scan.component';
+import {StallSelectionPage} from '../stall-selection/stall-selection';
 
 @IonicPage()
 @Component({
@@ -20,16 +15,12 @@ export class ProfilePage {
         public navCtrl: NavController,
         public navParams: NavParams,
         public viewCtrl: ViewController) {
-        // this.userCode = this.navParams.get('userCode');
-        // console.log(this.userCode);
     }
 
     ionViewDidLoad() {
-        // console.log('ionViewDidLoad ProfilePage', this.userCode);
     }
 
-    openQRScanner() {
-        console.log('qrscan logged');
+    navigateToStallSelectionPage() {
         this.navCtrl.push(StallSelectionPage, {});
         this.viewCtrl.dismiss();
     }

@@ -1,13 +1,10 @@
-import { Component, Inject } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import {Component, Inject} from '@angular/core';
+import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {StallService} from '../../services/stall/stall-service';
-import {AppPreferences} from '@ionic-native/app-preferences';
-import {PreferenceKey} from '../../config/constants';
-import {GetIdeasResponse} from '../../services/stall/responses';
+import {StallQRScanPage} from '../stall-qr-scan/stall-qr-scan.component';
 import {Stall} from '../../services/stall/Stall';
-import { timestamp } from 'rxjs/operators';
-import { StallQRScanPage } from '../stall-qr-scan/stall-qr-scan.component';
+import {Idea} from '../../services/stall/Idea';
 
 /**
  * Generated class for the StallSelectionPage page.
@@ -18,53 +15,55 @@ import { StallQRScanPage } from '../stall-qr-scan/stall-qr-scan.component';
 
 @IonicPage()
 @Component({
-  selector: 'page-stall-selection',
-  templateUrl: 'stall-selection.html',
+    selector: 'page-stall-selection',
+    templateUrl: 'stall-selection.html',
 })
 export class StallSelectionPage {
 
-  stallForm: any;
- ideasResponse: any;
- stallcode: any;
+    stallForm: FormGroup;
+    ideasResponse: Idea[] = [];
+    stallResponse: Stall[] = [];
+    private selectedStall?: Stall;
+    private selectedIdea?: Idea;
 
- 
-  constructor(
-    public navCtrl: NavController,
-     public navParams: NavParams,
-     private fb: FormBuilder, @Inject('STALL_SERVICE') private stallService: StallService,
-      private viewCtrl:ViewController) {
-      this.initializeForm();
-  }
-  initializeForm() {   
-    this.stallForm = this.fb.group({
-      stallName: ['', Validators.required],
-      stallIdea: ['', Validators.required]
-    });
-  }
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad StallSelectionPage');
-    this.fetchStallDetails();
-  }
+    constructor(
+        public navCtrl: NavController,
+        public navParams: NavParams,
+        private fb: FormBuilder, @Inject('STALL_SERVICE') private stallService: StallService,
+        private viewCtrl: ViewController) {
+        this.initializeForm();
+    }
 
-  private async fetchStallDetails() {
-    // this.stallForm = await this.stallService.getStalls({ Stall: {} });
-    this.stallcode =  await this.stallService.getStalls({ Stall: {} });
+    initializeForm() {
+        this.stallForm = this.fb.group({
+            stallName: [null, Validators.required],
+            stallIdea: [null, Validators.required]
+        });
+    }
 
-    console.log(this.stallcode);
-  }
- 
-  public onStallSelect() {
-    console.log('hi', this.stallForm.value);    
-    const stallCode = this.stallForm.value.stallName;
-    console.log(stallCode);
-    this.stallService.getIdeas({code: stallCode}).then((data) => {
-      console.log(data);
-      this.ideasResponse = data.Stall.ideas;
-    });
+    ionViewDidLoad() {
+        this.fetchStallDetails();
+    }
 
-}
-StallSubmit(){
-  this.navCtrl.push(StallQRScanPage, {});
-   this.viewCtrl.dismiss();
-}
+    public onStallSelect(stall: Stall) {
+        this.selectedStall = stall;
+
+        this.stallService.getIdeas({code: stall.code}).then((data) => {
+            this.ideasResponse = data.Stall.ideas;
+        });
+
+    }
+
+    public onIdeaSelect(idea: Idea) {
+        this.selectedIdea = idea;
+    }
+
+    onSubmit() {
+        this.navCtrl.push(StallQRScanPage, {});
+        this.viewCtrl.dismiss();
+    }
+
+    private async fetchStallDetails() {
+        this.stallResponse = await this.stallService.getStalls({Stall: {}});
+    }
 }
