@@ -32,20 +32,20 @@
     </ion-item> -->
     <form [formGroup]="guestRegistrationForm" class="form">
         <div text-center class="image-section">
-            <img width="80" height="80" src="assets/imgs/smiley.svg" />
+            <ion-icon name="happy" [color]="'light'" style="zoom:4.0;"></ion-icon>
         </div>
         <div class="text-section">
-            <ion-label text-center style="font-size:25px; color:yellow" (tap)='onClickToNavigateToStallForm()'><b>Welcome to Devcon !!!</b></ion-label>
-            <ion-label></ion-label>
-            <ion-label text-center style="color:#ffffff; margin-top:-19px; margin-bottom:20px;">Please enter your
+            <h1 text-center margin-bottom style="font-size:25px; color:yellow" (tap)='onClickToNavigateToStallForm()'>
+                <b>Welcome to Devcon !!!</b></h1>
+            <h3 text-center style="color:#ffffff; margin-top:-19px; margin-bottom:20px;">Please enter your
                 details
-                to get started</ion-label>
+                to get started</h3>
         </div>
         <div text-center class="camera-icon" (click)="takePicture()" *ngIf="lastImage === null">
             <ion-icon name="camera"></ion-icon>
         </div>
         <div text-center class="camera-icon" *ngIf="lastImage !== null">
-            <img src="{{lastImage}}" (click)="takePicture(true)" style="width: 120px;height: 120px;border-radius: 50%;">
+            <img src="{{lastImage}}" (click)="takePicture(true)" style="width: 50px;height: 50px;border-radius: 50%;">
         </div>
         <ion-item class="custom-input" no-lines style="margin-bottom:4vh">
             <ion-input type="text" class="placeholder-text" formControlName="name" placeholder="User Name"></ion-input>
@@ -57,8 +57,16 @@
             </ion-select>
         </ion-item>
 
-        <button ion-button color="light" style="border-radius: 4px; margin-top:10vh; margin-left:43%" [disabled]="!guestRegistrationForm.valid"
-            (click)="register()">Submit</button>
+        <ion-grid>
+            <ion-row>
+                <ion-col text-center>
+                    <button ion-button color="light" margin-top style="border-radius: 4px;"
+                            [disabled]="!guestRegistrationForm.valid"
+                            (click)="register()">Submit
+                    </button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
     </form>
 </ion-content>
 
