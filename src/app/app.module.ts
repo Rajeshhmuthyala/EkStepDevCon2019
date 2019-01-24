@@ -1,5 +1,4 @@
-import { RatingPopupComponent } from './../components/rating-popup/rating-popup';
-import { UserServiceMock } from './../services/user/user-service-mock';
+import {RatingPopupComponent} from './../components/rating-popup/rating-popup';
 import {UserIdeasPage} from './../pages/user-ideas/user-ideas';
 import {AboutAppuPage} from './../pages/about-appu/about-appu';
 import {BrowserModule} from '@angular/platform-browser';
@@ -36,12 +35,12 @@ import {TelemetryApiHandlerService} from '../services/api/telemetry-api-handler-
 import {QRCodeModule} from 'angularx-qrcode';
 import {PreferenceKey} from '../config/constants';
 import {StallServicesImpl} from '../services/stall/stall-services-impl';
-import { StallSelectionPage } from '../pages/stall-selection/stall-selection';
-
+import {StallSelectionPage} from '../pages/stall-selection/stall-selection';
 // Face API related imports *************
-import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
-import { Camera } from '@ionic-native/camera';
-import { Transfer } from '@ionic-native/transfer';
+import {Base64ToGallery} from '@ionic-native/base64-to-gallery';
+import {Camera} from '@ionic-native/camera';
+import {Transfer} from '@ionic-native/transfer';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -68,7 +67,8 @@ import { Transfer } from '@ionic-native/transfer';
         BrowserModule,
         IonicModule.forRoot(MyApp),
         LottieAnimationViewModule.forRoot(),
-        Ionic2RatingModule
+        Ionic2RatingModule,
+        ReactiveFormsModule
     ],
     bootstrap: [IonicApp],
     entryComponents: [

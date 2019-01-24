@@ -27,8 +27,8 @@ export class StallListPage {
     constructor(
         @Inject('STALL_SERVICE') private stallService: StallService,
         @Inject('TELEMETRY_SERVICE') private telemetryService: TelemetryService,
-        private popCtrl  : PopoverController,
-        private loadingCtrl: LoadingController,) {
+        private popCtrl: PopoverController,
+        private loadingCtrl: LoadingController) {
     }
 
     ionViewDidLoad() {
@@ -72,14 +72,14 @@ export class StallListPage {
     }
 
     public onStallSelect(stall: Stall) {
-        if(stall.code !== "STA1"){
+        if (stall.code !== "STA1") {
             const loader = this.getLoader();
             loader.present();
             this.stallService.getIdeas({code: stall.code}).then((data) => {
                 this.currentStall = stall;
                 this.ideasResponse = data;
             });
-            loader.dismiss(); 
+            loader.dismiss();
         } else {
             this.stallService.getIdeas({code: stall.code}).then((data) => {
                 this.currentStall = stall;
@@ -87,7 +87,7 @@ export class StallListPage {
             });
 
         }
-     
+
     }
 
     private async fetchStalls() {
@@ -97,52 +97,27 @@ export class StallListPage {
         loader.dismiss();
     }
 
-    public onClickToAddFeedback() {
+    public onClickToAddFeedback(idea: Idea) {
         const popUp = this.popCtrl.create(RatingPopupComponent, {
-              cssClass: 'content-rating-alert'
-            });
-          popUp.present({
+            selectedStall: this.currentStall,
+            selectedIdea: idea,
+            cssClass: 'content-rating-alert'
+        });
+        popUp.present({
             ev: event
-          });
+        });
     }
 
     private fetchBoughtIdeas() {
         this.boughtIdeasSubscription = this.stallService.getBoughtIdeas().subscribe((emit) => {
             this.boughtIdeas = emit;
-            console.log(emit);
         });
     }
 
-    public onRating(idea: Idea, value: number) {
-        this.stallService.giveFeedbackIdea({
-            stallCode: this.currentStall.code,
-            ideaCode: idea.code,
-            details: {
-                stallName: this.currentStall.name,
-                ideaName: idea.name,
-                desc: idea.description,
-                rating: value,
-                comment: ''
-            }
-        }).then(async () => {
-            await this.telemetryService.generateFeedbackTelemetry({
-                dimensions: {
-                    stallId: this.currentStall.code,
-                    stallName: this.currentStall.name,
-                    ideaId: idea.code,
-                    ideaName: idea.name,
-                },
-                edata: {
-                    rating: value,
-                    comment: ''
-                }
-            })
-        });
-    }
     getLoader(): any {
         return this.loadingCtrl.create({
-          duration: 30000,
-          spinner: 'crescent'
+            duration: 30000,
+            spinner: 'crescent'
         });
-      }
+    }
 }
