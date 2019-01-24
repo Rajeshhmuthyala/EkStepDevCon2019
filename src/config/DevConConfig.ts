@@ -6,5 +6,7 @@ export const DevConConfig: AppConfig = {
     orgList: [
         'EkStep', 'BeyondSquare', 'Compassites', 'FrameWirk', 'Funtoot', 'GWL', 'ILIMI', 'Lollypop', 'MantraLabs', 'OPTIT',
         'PosteroTech', 'Qualitrix', 'Tarento', 'TEKDI', 'Tibil', 'TurtleBowl', 'Zool', 'Other'
-    ]
+    ],
+    availableCoins: 500,
+    coinsPerIdea: 50
 };
