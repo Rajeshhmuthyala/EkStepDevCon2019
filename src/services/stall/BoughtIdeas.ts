@@ -1,5 +1,5 @@
 export interface BoughtIdeas {
-    [key: string]: BoughtIdea;
+    [key: string]: BoughtIdea | undefined;
 }
 
 export interface BoughtIdea {
