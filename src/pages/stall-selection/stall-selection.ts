@@ -39,16 +39,12 @@ export class StallSelectionPage {
     }
 
     ionViewDidLoad() {
-        console.log('ionViewDidLoad StallSelectionPage');
         this.fetchStallDetails();
     }
 
     public onStallSelect() {
-        console.log('hi', this.stallForm.value);
         const stallCode = this.stallForm.value.stallName;
-        console.log(stallCode);
         this.stallService.getIdeas({code: stallCode}).then((data) => {
-            console.log(data);
             this.ideasResponse = data.Stall.ideas;
         });
 
@@ -62,7 +58,5 @@ export class StallSelectionPage {
     private async fetchStallDetails() {
         // this.stallForm = await this.stallService.getStalls({ Stall: {} });
         this.stallcode = await this.stallService.getStalls({Stall: {}});
-
-        console.log(this.stallcode);
     }
 }
