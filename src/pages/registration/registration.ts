@@ -82,7 +82,9 @@ export class RegistrationPage {
                 return this.appPreference.fetch(PreferenceKey.USER_CODE)
                     .then((userCode: string) => this.userService.getUser({ code: userCode }))
             }).then(async (userResponse: GetUserResponse) => {
-                this.uploadImage(createUser.Visitor.name); // Face APi call to upload file
+                if(this.lastImage) {
+                    this.uploadImage(createUser.Visitor.name); // Face APi call to upload file
+                }
                 return this.telemetryService.generateRegisterTelemetry({
                     dimensions: {
                         visitorId: userResponse.Visitor.code,
