@@ -45,6 +45,7 @@ export class RatingPopupComponent {
 
     public onSubmit() {
         const loader = this.getLoader();
+        loader.present();
 
         this.stallService.giveFeedbackIdea({
             stallCode: this.selectedStall.code,
