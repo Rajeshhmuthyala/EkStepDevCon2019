@@ -4,7 +4,8 @@ import {
     PopoverController,
     Platform,
     ToastController,
-    LoadingController // Face API *****
+    LoadingController, // Face API *****
+    Loading
 } from 'ionic-angular'; // Face API imports Platform, ToastController
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AppPreferences } from '@ionic-native/app-preferences';
@@ -63,6 +64,8 @@ export class RegistrationPage {
     }
 
     public async register() {
+        const loader = await this.getLoader();
+        await loader.present();
         const createUser = {
             Visitor: {
                 name: this.guestRegistrationForm.get('name').value,
@@ -92,6 +95,7 @@ export class RegistrationPage {
             }).catch((e) => {
                 console.error(e);
             })
+            loader.dismiss();
     }
 
     onClickToNavigateToStallForm() {
@@ -184,6 +188,12 @@ export class RegistrationPage {
           position: 'top'
         });
         toast.present();
+    }
+    private getLoader(): Loading {
+        return this.loadingCtrl.create({
+            duration: 30000,
+            spinner: 'crescent'
+        });
     }
 
     public getUploadURL(action, userName?): any {
@@ -295,4 +305,5 @@ export class RegistrationPage {
 
     // ******************** Add after this block
     // *****************************************
+   
 }

@@ -84,6 +84,7 @@ import {ReactiveFormsModule} from '@angular/forms';
         UserIdeasPage,
         StallSelectionPage,
         RatingPopupComponent
+
     ],
     providers: [
         StatusBar,
