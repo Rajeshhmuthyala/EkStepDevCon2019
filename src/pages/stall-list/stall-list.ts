@@ -1,4 +1,4 @@
-import { PopoverController } from 'ionic-angular';
+import {Loading, LoadingController, PopoverController} from 'ionic-angular';
 import {Component, Inject} from '@angular/core';
 import {StallService} from '../../services/stall/stall-service';
 import {BoughtIdeas} from '../../services/stall/BoughtIdeas';
@@ -6,8 +6,9 @@ import {GetIdeasResponse} from '../../services/stall/responses';
 import {Idea} from '../../services/stall/Idea';
 import {Stall} from '../../services/stall/Stall';
 import {TelemetryService} from '../../services/telemetry/telemetry-services';
-import { RatingPopupComponent } from '../../components/rating-popup/rating-popup';
-import {LoadingController} from 'ionic-angular';
+import {RatingPopupComponent} from '../../components/rating-popup/rating-popup';
+import {Subscription} from 'rxjs';
+import {AppConfig} from '../../config/AppConfig';
 
 @Component({
     selector: 'page-stall-list',
@@ -22,19 +23,26 @@ export class StallListPage {
     };
     private currentStall: Stall;
     private boughtIdeas: BoughtIdeas = {};
+    private boughtIdeasSubscription: Subscription;
 
     constructor(
         @Inject('STALL_SERVICE') private stallService: StallService,
         @Inject('TELEMETRY_SERVICE') private telemetryService: TelemetryService,
-        private popCtrl  : PopoverController,
-        private loadingCtrl: LoadingController,) {
+        @Inject('APP_CONFIG') private config: AppConfig,
+        private popCtrl: PopoverController,
+        private loadingCtrl: LoadingController) {
     }
 
     ionViewDidLoad() {
         this.fetchStalls().then(() => {
             this.onStallSelect(this.stalls[0]);
         });
+
         this.fetchBoughtIdeas();
+    }
+
+    ionViewWillLeave() {
+        this.boughtIdeasSubscription.unsubscribe();
     }
 
     public isIdeaBought(ideaCode: string): boolean {
@@ -44,6 +52,9 @@ export class StallListPage {
     }
 
     public onBuyIdea(idea: Idea) {
+        const loader = this.getLoader();
+        loader.present();
+
         this.stallService.buyIdea({
             stallCode: this.currentStall.code,
             ideaCode: idea.code,
@@ -63,19 +74,19 @@ export class StallListPage {
                 edata: {}
             })
         }).then(() => {
-            this.fetchBoughtIdeas();
-        });
+            loader.dismiss()
+        })
     }
 
     public onStallSelect(stall: Stall) {
-        if(stall.code !== "STA1"){
+        if (stall.code !== "STA1") {
             const loader = this.getLoader();
             loader.present();
             this.stallService.getIdeas({code: stall.code}).then((data) => {
                 this.currentStall = stall;
                 this.ideasResponse = data;
             });
-            loader.dismiss(); 
+            loader.dismiss();
         } else {
             this.stallService.getIdeas({code: stall.code}).then((data) => {
                 this.currentStall = stall;
@@ -83,7 +94,7 @@ export class StallListPage {
             });
 
         }
-     
+
     }
 
     private async fetchStalls() {
@@ -93,54 +104,46 @@ export class StallListPage {
         loader.dismiss();
     }
 
-    private async fetchBoughtIdeas() {
-        this.boughtIdeas = await this.stallService.getBoughtIdeas();
-    }
-    rateContent(){
+    public onClickToAddFeedback(idea: Idea) {
+        if (this.getRating(idea)) {
+            return;
+        }
+
         const popUp = this.popCtrl.create(RatingPopupComponent, {
-              cssClass: 'content-rating-alert'
-            });
-          popUp.present({
+            selectedStall: this.currentStall,
+            selectedIdea: idea,
+            cssClass: 'content-rating-alert'
+        });
+        popUp.present({
             ev: event
-          });
-        //   popUp.onDidDismiss(data => {
-        //     if (data && data.message === 'rating.success') {
-        //       this.userRating = data.rating;
-        //       this.ratingComment = data.comment;
-        //     }
-        //   });
+        });
     }
 
-    public onRating(idea: Idea, value: number) {
-        this.stallService.giveFeedbackIdea({
-            stallCode: this.currentStall.code,
-            ideaCode: idea.code,
-            details: {
-                stallName: this.currentStall.name,
-                ideaName: idea.name,
-                desc: idea.description,
-                rating: value,
-                comment: ''
-            }
-        }).then(async () => {
-            await this.telemetryService.generateFeedbackTelemetry({
-                dimensions: {
-                    stallId: this.currentStall.code,
-                    stallName: this.currentStall.name,
-                    ideaId: idea.code,
-                    ideaName: idea.name,
-                },
-                edata: {
-                    rating: value,
-                    comment: ''
-                }
-            })
+    public getRating(idea: Idea) {
+        const key = `${this.currentStall.code}-${idea.code}`;
+
+        if (this.boughtIdeas[key]) {
+            return this.boughtIdeas[key].rating;
+        } else {
+            return 0;
+        }
+    }
+
+    private fetchBoughtIdeas() {
+        this.boughtIdeasSubscription = this.stallService.getBoughtIdeas().subscribe((emit) => {
+            this.boughtIdeas = emit;
         });
     }
-    getLoader(): any {
+
+    public getAvailableCoins(): any {
+        const purchasedIdeas: number = Object.keys(this.boughtIdeas).length;
+        return this.config.availableCoins - (purchasedIdeas * this.config.coinsPerIdea);
+    }
+
+    private getLoader(): Loading {
         return this.loadingCtrl.create({
-          duration: 30000,
-          spinner: 'crescent'
+            duration: 30000,
+            spinner: 'crescent'
         });
-      }
+    }
 }
