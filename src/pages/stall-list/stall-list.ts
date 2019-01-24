@@ -1,4 +1,4 @@
-import {LoadingController, PopoverController} from 'ionic-angular';
+import {Loading, LoadingController, PopoverController} from 'ionic-angular';
 import {Component, Inject} from '@angular/core';
 import {StallService} from '../../services/stall/stall-service';
 import {BoughtIdeas} from '../../services/stall/BoughtIdeas';
@@ -8,6 +8,7 @@ import {Stall} from '../../services/stall/Stall';
 import {TelemetryService} from '../../services/telemetry/telemetry-services';
 import {RatingPopupComponent} from '../../components/rating-popup/rating-popup';
 import {Subscription} from 'rxjs';
+import {AppConfig} from '../../config/AppConfig';
 
 @Component({
     selector: 'page-stall-list',
@@ -27,6 +28,7 @@ export class StallListPage {
     constructor(
         @Inject('STALL_SERVICE') private stallService: StallService,
         @Inject('TELEMETRY_SERVICE') private telemetryService: TelemetryService,
+        @Inject('APP_CONFIG') private config: AppConfig,
         private popCtrl: PopoverController,
         private loadingCtrl: LoadingController) {
     }
@@ -50,6 +52,9 @@ export class StallListPage {
     }
 
     public onBuyIdea(idea: Idea) {
+        const loader = this.getLoader();
+        loader.present();
+
         this.stallService.buyIdea({
             stallCode: this.currentStall.code,
             ideaCode: idea.code,
@@ -68,7 +73,9 @@ export class StallListPage {
                 },
                 edata: {}
             })
-        });
+        }).then(() => {
+            loader.dismiss()
+        })
     }
 
     public onStallSelect(stall: Stall) {
@@ -98,6 +105,10 @@ export class StallListPage {
     }
 
     public onClickToAddFeedback(idea: Idea) {
+        if (this.getRating(idea)) {
+            return;
+        }
+
         const popUp = this.popCtrl.create(RatingPopupComponent, {
             selectedStall: this.currentStall,
             selectedIdea: idea,
@@ -108,13 +119,28 @@ export class StallListPage {
         });
     }
 
+    public getRating(idea: Idea) {
+        const key = `${this.currentStall.code}-${idea.code}`;
+
+        if (this.boughtIdeas[key]) {
+            return this.boughtIdeas[key].rating;
+        } else {
+            return 0;
+        }
+    }
+
     private fetchBoughtIdeas() {
         this.boughtIdeasSubscription = this.stallService.getBoughtIdeas().subscribe((emit) => {
             this.boughtIdeas = emit;
         });
     }
 
-    getLoader(): any {
+    public getAvailableCoins(): any {
+        const purchasedIdeas: number = Object.keys(this.boughtIdeas).length;
+        return this.config.availableCoins - (purchasedIdeas * this.config.coinsPerIdea);
+    }
+
+    private getLoader(): Loading {
         return this.loadingCtrl.create({
             duration: 30000,
             spinner: 'crescent'
